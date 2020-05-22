@@ -1,7 +1,11 @@
-from flexx import flx, event
+from flexx import flx, event, ui
+import tkinter as tk
+from tkinter import filedialog
+
+from src.FileViewer import FileViewer
 
 
-class ThemedForm(flx.Widget):
+class StudyLoadPy(flx.Widget):
     CSS = """
     .flx-Button {
         margin-left: 25px;
@@ -23,6 +27,9 @@ class ThemedForm(flx.Widget):
     .flx-Label {
         margin-top: 30px;
     }
+    .flx-title {
+        margin-left: 25px;
+    }
     """
 
     def init(self):
@@ -30,6 +37,7 @@ class ThemedForm(flx.Widget):
             with flx.FormLayout() as self.form:
                 self.b1 = flx.LineEdit(title='Name:', text='')
                 self.button_open = flx.Button(text='Open')
+                #filedialog.askopenfile()
                 types_of_parse = ['Денна 1 сем', 'Денна 2 сем', 'Заочна 1 сем', 'Заочна 2 сем']
                 self.combo = flx.ComboBox(editable=False, options=types_of_parse)
                 self.button_submit = flx.Button(text='Submit')
@@ -41,16 +49,17 @@ class ThemedForm(flx.Widget):
     @event.reaction
     def update_label(self):
         text = self.combo.text
-        #if self.combo.selected_index is not None:
-            #text += ' (index %i)' % self.combo.selected_index
         self.label2.set_text(text)
 
     @flx.reaction('button_open.pointer_click')
     def _button_clicked(self, *events):
         ev = events[-1]
+        f = FileViewer(ui.FileBrowserWidget)
         text = self.label.text + ev.source.text
         self.label.set_text(text)
 
+
 if __name__ == '__main__':
-    m = flx.launch(ThemedForm, 'app')
+    app = flx.App(StudyLoadPy)
+    app.serve('StudyLoadPy')
     flx.run()
