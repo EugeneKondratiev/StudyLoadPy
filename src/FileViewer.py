@@ -1,29 +1,34 @@
-# imports
-from flexx import app, event, ui, flx, config
+from tkinter import *
+from tkinter import ttk
 
+root = Tk()
 
-## These two lines are  UNCOMMENTED when I run
-# config.hostname = 'myhost'            # publish flexx app on hostname not just localhost
-# config.port = 12345                   # serve flexx app on this port
+content = ttk.Frame(root)
+frame = ttk.Frame(content, borderwidth=5, relief="sunken", width=200, height=100)
+namelbl = ttk.Label(content, text="Name")
+name = ttk.Entry(content)
 
-class FileViewer(ui.FileBrowserWidget):
-    print(f'DEBUG: Instantiated FileViewer instance')
+onevar = BooleanVar()
+twovar = BooleanVar()
+threevar = BooleanVar()
+onevar.set(True)
+twovar.set(False)
+threevar.set(True)
 
-    @flx.reaction('selected')
-    def fileSelected(self, *events):
-        print(f'DEBUG: We are in fileSelected reaction')
-        ev = events[-1]  # only care about last event
-        print(f'DEBUG: File {ev.filename} selected in FileViewer')
-        try:
-            f = open(ev.filename, 'r')
-            if f.mode == 'r':
-                contents = f.read()
-                print(f'DEBUG: file content is: {contents}')
-        except:
-            print(f'ERROR: unable to open file {ev.filename} for reading')
+one = ttk.Checkbutton(content, text="One", variable=onevar, onvalue=True)
+two = ttk.Checkbutton(content, text="Two", variable=twovar, onvalue=True)
+three = ttk.Checkbutton(content, text="Three", variable=threevar, onvalue=True)
+ok = ttk.Button(content, text="Okay")
+cancel = ttk.Button(content, text="Cancel")
 
+content.grid(column=0, row=0)
+frame.grid(column=0, row=0, columnspan=3, rowspan=2)
+namelbl.grid(column=3, row=0, columnspan=2)
+name.grid(column=3, row=1, columnspan=2)
+one.grid(column=0, row=3)
+two.grid(column=1, row=3)
+three.grid(column=2, row=3)
+ok.grid(column=3, row=3)
+cancel.grid(column=4, row=3)
 
-if __name__ == '__main__':
-    app = flx.App(FileViewer)
-    app.serve('FileViewer')
-    flx.start()
+root.mainloop()
