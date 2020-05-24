@@ -13,3 +13,4 @@ p5 = pars()
 if __name__ == "__main__":
     StudyLoadFrame().mainloop()
 
+
