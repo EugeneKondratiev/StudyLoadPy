@@ -6,9 +6,9 @@ from src.pars import pars
 
 p1 = DennaSem1()
 p2 = ZaoсhnaSem1()
-p4 = DennaSem2()
-p3 = ZaoсhnaSem2()
-p4 = pars()
+p3 = DennaSem2()
+p4 = ZaoсhnaSem2()
+p5 = pars()
 
 
 # ws = wb["Робота кафедри"]
