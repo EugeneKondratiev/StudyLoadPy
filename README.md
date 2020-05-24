@@ -1,3 +1,3 @@
 pip install openpyxl
 
-pip install flexx
+pip install pywin32
