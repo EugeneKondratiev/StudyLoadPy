@@ -12,32 +12,24 @@ class StudyLoadFrame(Frame):
     def __init__(self):
         Frame.__init__(self)
         self.master.title("Навантаження кафедри")
-        self.master.rowconfigure(5, weight=1)
-        self.master.columnconfigure(5, weight=1)
+        self.master.rowconfigure(7, weight=1)
+        self.master.columnconfigure(6, weight=1)
         self.grid(sticky=W + E + N + S)
         self.master.geometry("800x600")
         self.style = Style()
-        self.style.configure('TButton', font=('calibri', 15, 'normal'), borderwidth='4', padding=4, background="#ccc")
+        self.style.configure('TButton', font=('calibri', 13, 'normal'), borderwidth='4', padding=4, background="#ccc")
         self.combostyle = ttk.Style()
 
-        self.combostyle.theme_create('combostyle', parent='alt',
-                                     settings={'TCombobox':
-                                                   {'configure':
-                                                        {'selectbackground': '#2E7884',
-                                                         'fieldbackground': '#9DD2EA',
-                                                         'background': '#43C3D8',
-                                                         }}}
-                                     )
         # ATTENTION: this applies the new style 'combostyle' to all ttk.Combobox
-        self.combostyle.theme_use('combostyle')
+        # self.combostyle.theme_use('combostyle')
 
         self.fName = StringVar()
         self.fName.set(" ")
         self.default_file_names = []
         self.only_file_name = []
         self.file_names_split = StringVar()
-        self.button_open = ttk.Button(self, text="Відкрити", command=self.load_file, width=10, style='TButton')
-
+        self.button_open_kafedra = ttk.Button(self, text="Відкрити", command=self.load_file, width=10, style='TButton')
+        self.button_open_rnp = ttk.Button(self, text="Відкрити", command=self.load_file2, width=10, )
         self.label_Files = ttk.Label(self, textvariable="Відкрийте декілька файлів для ", width=50)
         self.label_Files = ttk.Label(self, textvariable=self.fName, width=50, style='TButton')
 
@@ -49,7 +41,7 @@ class StudyLoadFrame(Frame):
                                            style='TButton')
         self.button_converter.grid(row=2, column=0, columnspan=3, padx=50, pady=30)
         self.label_Files.grid(row=3, column=0, columnspan=3, padx=30, pady=30)
-        self.button_open.grid(row=1, column=1, columnspan=3, padx=30, pady=30)
+        self.button_open_kafedra.grid(row=1, column=1, columnspan=3, padx=30, pady=30)
         self.combobox_Files.grid(row=1, column=0, padx=30)
 
     def load_file(self):
