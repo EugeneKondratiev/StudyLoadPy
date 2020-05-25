@@ -120,7 +120,7 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
         return
 
     def create_report(self):
-        #try:
+        try:
             save_name = QtWidgets.QFileDialog.getSaveFileName(self, "Save File", "resources",
                                                                 "XLS files (*.xls *.xlsx)")
             report_Objcet = doc1(save_name, self.default_file_names[self.comboBox.currentIndex()],
@@ -132,8 +132,8 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
                                          "Report created!\n",
                                          QtWidgets.QMessageBox.Ok)
             info.exec_()
-        #except:
-         #   error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning, "Report File", "Failed to create report file\n",
-         #                                 QtWidgets.QMessageBox.Ok)
-          #  error.exec_()
-        #return
+        except:
+            error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning, "Report File", "Failed to create report file\n",
+                                          QtWidgets.QMessageBox.Ok)
+            error.exec_()
+        return
