@@ -3,8 +3,8 @@ from openpyxl import *
 
 class DennaSem1:
 
-    def __init__(self):
-        wb = load_workbook("resources\\ІТтаКБ. Сем I. Форма навчання  денна.xlsx")
+    def __init__(self, file_name):
+        wb = load_workbook(file_name)
         sheet = wb.active
 
         c = 0

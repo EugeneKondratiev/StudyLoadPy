@@ -4,10 +4,13 @@ from openpyxl.worksheet.worksheet import Worksheet
 
 
 class pars:
-    def __init__(self):
-        wb = load_workbook("resources\\Бакалавр (Денна)\\РНП 122 КН КН 1 курс скороч. 2р. 2019-2020 (2019-11-19).xlsx")
-        wd = load_workbook("resources\\ІТтаКБ. Сем I. Форма навчання  денна.xlsx")
-        ws = load_workbook("resources\\ІТтаКБ. Сем II. Форма навчання  денна.xlsx")
+    def __init__(self, rnp_file, forma_1sem, forma_2sem):
+        print(rnp_file)
+        print(forma_1sem)
+        print(forma_2sem)
+        wb = load_workbook(rnp_file)
+        wd = load_workbook(forma_1sem)
+        ws = load_workbook(forma_2sem)
         sem2: Worksheet = ws.active
         RNP: Worksheet = wb.active
         sem1: Worksheet = wd.active

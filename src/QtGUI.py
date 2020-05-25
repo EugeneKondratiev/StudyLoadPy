@@ -1,7 +1,9 @@
 from PyQt5 import QtWidgets
 
+from src.Doc1 import doc1
 from src.convert import ConverterXLS
 from src.design import Ui_MainWindow
+from src.pars import pars
 
 
 class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -12,10 +14,12 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
         self.pushButton_2.clicked.connect(self.load_file)
         self.pushButton_5.clicked.connect(self.compare_files)
         self.pushButton_8.clicked.connect(self.convert_file)
+        self.pushButton_6.clicked.connect(self.create_report)
         self.only_file_name = []
         self.only_file_name_rnp = []
         self.default_file_names = []
         self.default_file_names_rnp = []
+        self.radioButton.click()
 
     def load_file(self):
         files_name = QtWidgets.QFileDialog.getOpenFileNames(self, "Open File", "resources", "XLS files (*.xls *.xlsx)")
@@ -97,6 +101,14 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def compare_files(self):
         try:
+            if self.radioButton.isChecked():
+                pars_object = pars(self.default_file_names_rnp[self.comboBox_3.currentIndex()],
+                                   self.default_file_names[self.comboBox.currentIndex()],
+                                   self.default_file_names[self.comboBox_2.currentIndex()])
+            else:
+                pars_object = pars(self.default_file_names_rnp[self.comboBox_3.currentIndex()],
+                                   self.default_file_names[self.comboBox_4.currentIndex()],
+                                   self.default_file_names[self.comboBox_5.currentIndex()])
             info = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Information, "Compare file",
                                          "Compare succeeded!\n",
                                          QtWidgets.QMessageBox.Ok)
@@ -106,3 +118,22 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
                                           QtWidgets.QMessageBox.Ok)
             error.exec_()
         return
+
+    def create_report(self):
+        #try:
+            save_name = QtWidgets.QFileDialog.getSaveFileName(self, "Save File", "resources",
+                                                                "XLS files (*.xls *.xlsx)")
+            report_Objcet = doc1(save_name, self.default_file_names[self.comboBox.currentIndex()],
+                                 self.default_file_names[self.comboBox_2.currentIndex()],
+                                 self.default_file_names[self.comboBox_4.currentIndex()],
+                                 self.default_file_names[self.comboBox_5.currentIndex()])
+
+            info = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Information, "Report file",
+                                         "Report created!\n",
+                                         QtWidgets.QMessageBox.Ok)
+            info.exec_()
+        #except:
+         #   error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning, "Report File", "Failed to create report file\n",
+         #                                 QtWidgets.QMessageBox.Ok)
+          #  error.exec_()
+        #return
