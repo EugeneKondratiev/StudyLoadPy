@@ -1,5 +1,6 @@
 import win32com.client
-from tkinter.messagebox import showerror, showinfo
+
+from PyQt5 import QtWidgets
 
 
 class ConverterXLS:
@@ -9,12 +10,21 @@ class ConverterXLS:
             wb = excel.Workbooks.Open(file_name)
             try:
                 wb.SaveAs(file_name + 'x', FileFormat=51)  # FileFormat = 51 is for .xlsx extension
-                showinfo('Convert excel file', 'Convert xls to xlsx succeeded!')
+                info = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Information, "Convert excel file",
+                                             "Convert xls to xlsx succeeded!\n",
+                                             QtWidgets.QMessageBox.Ok)
+                info.exec_()
             except:
-                showerror("Open Source File", "You have declined conver this file\n'%s'" % file_name)
+                error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning, "Save Source File",
+                                              "You have declined convert this file\n",
+                                              QtWidgets.QMessageBox.Ok)
+                error.exec_()
             finally:
                 wb.Close()  # FileFormat = 56 is for .xls extension
                 excel.Application.Quit()
 
         else:
-            showerror("Open Source File", "This file is not xls\n'%s'" % file_name)
+            error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning, "Open Source File",
+                                          "This file is not xls\n",
+                                          QtWidgets.QMessageBox.Ok)
+            error.exec_()
