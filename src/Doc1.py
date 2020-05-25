@@ -8,6 +8,7 @@ from src.ZaoсhnaSem1 import ZaoсhnaSem1
 
 
 class doc1:
+    filename = "Звіт1.xlsx"
     #Считаем сумму общую за год, по семестрам, по стационару, по заочке, за семестр по видам деятельности (лекции, лабы и т.д.),
     # за год по видам деятельности. Далее это будет использоваться как контрольные суммы. Вид отчета: экран и файл *.ºxlsx (xls)
     denna1 = DennaSem1()
@@ -485,5 +486,5 @@ class doc1:
     wcell45 = ws.cell(15, 22)
     wcell45.value = zaoch2[28]
     wcell46 = ws.cell(14, 23)
-    wb.save('Звіт1.xlsx')
+    wb.save(filename)
     wb.close()
