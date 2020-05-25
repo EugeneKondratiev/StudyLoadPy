@@ -7,15 +7,15 @@ class ZaoсhnaSem1:
         print("ZAOCHNA")
         sheet = wb.active
         print(wb.get_sheet_names())
-        b = []
+        self.a = []
         r = 0
         for j in range(6, 35):
-            b.append(r)
+            self.a.append(r)
             r = 0
             for i in range(18, 51):
                 print(i, sheet.cell(row=i, column=j).value)
                 if isinstance(sheet.cell(row=i, column=j).value, str) != True and sheet.cell(row=i, column=j).value is not None:
                     r = r + sheet.cell(row=i, column=j).value
 
-        print(b)
+        print(self.a)
         wb.close()

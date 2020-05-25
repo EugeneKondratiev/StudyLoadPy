@@ -9,7 +9,7 @@ class DennaSem2:
         print(wb.get_sheet_names())
 
         c = 0
-        a = []
+        self.a = []
         i = 0
         j = 0
 
@@ -17,7 +17,7 @@ class DennaSem2:
             print(i, sheet.cell(row=i, column=2).value)
 
         for j in range(6, 35):
-            a.append(c)
+            self.a.append(c)
             c = 0
             for i in range(18, 64):
                 print(i, sheet.cell(row=i, column=j).value)
@@ -26,5 +26,5 @@ class DennaSem2:
                     if i != 55 and i != 56 and i != 57 and i != 58 and i != 59 and i != 60 and i != 61 and i != 63:
                         c = c + sheet.cell(row=i, column=j).value
 
-        print(a)
+        print(self.a)
         wb.close()
