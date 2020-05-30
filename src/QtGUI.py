@@ -20,6 +20,145 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
         self.default_file_names = []
         self.default_file_names_rnp = []
         self.radioButton.click()
+        self.subjects = ['Дискретна математика',
+                         'Додатково годин на',
+                         'Години на ЕК',
+                         'Дипломне проектування',
+                         'Теорія інформації та кодування',
+                         'Математична логіка',
+                         'Переддипломна практика',
+                         'Науково-дослідна практика',
+                         'Структурне та логічне програмування',
+                         'Технології комп\'ютерного проектування',
+                         'Методи аналізу даних та їх організація',
+                         'Методи та засоби комп\'ютерних iнформацiйних технологiй',
+                         'Інформаційні технології управління виробництвом ',
+                         'Технології розподілених систем та паралельних обчислень',
+                         'Грід-системи та технології  хмарних обчислень',
+                         'Комп\'ютерний та технічний дизайн',
+                         'Комп\'ютерна графіка',
+                         'Проектування в середовищі машинобудівних CAD',
+                         'Геометричне моделювання та методи візуалізації',
+                         'Алгоритмізація та програмування',
+                         'Програмування',
+                         'Алгоритми та методи обчислень та чисельні методи',
+                         'Об\'єктно-орiєнтоване програмування',
+                         'Проектно-технологічна практика',
+                         'Алгоритми та методи обчислень',
+                         'Методи та системи підтримки прийняття рішень',
+                         'Розробка Web-систем',
+                         'Моделювання систем',
+                         'Чисельні методи',
+                         'Методологія наукових досліджень',
+                         'Веб технології та веб дизайн',
+                         'Інформаційно-аналітична діяльність у галузі інформаційної безпеки',
+                         'Інтелектуальний аналіз даних',
+                         'Органiзацiя баз даних та знань',
+                         'Методи та системи штучного iнтелекту',
+                         'Зосередженi та розподiленi системи управлiння базами даних',
+                         'Операційні системи',
+                         'Управління IT проектами',
+                         'Інформаційні технології',
+                         'Експертні системи',
+                         'Розробка програмного забезпечення',
+                         'Інформатика і системологія',
+                         'Основи автоматизованого проектування складних об`єктiв i систем',
+                         'Інформатика та програмування',
+                         'Крос-платформне програмування',
+                         'Паралельне та багатопоточне програмування',
+                         'Процедурне програмування',
+                         'Сучасні системи управління базами даних ',
+                         'Системний аналiз та проектування компютерних інформаційних систем',
+                         'Моделі технології пректування та управління інформаційними системами',
+                         'Чинники успішного працевлаштування',
+                         'Технології захисту інформації',
+                         'Теорія алгоритмів',
+                         'Математичні методи дослідження операцій',
+                         'Моделювання процесів та об\'єктів енергетичного машинобудування']
+        print(len(self.subjects))
+        self.lectors = ['Плотніков В. М.',
+                        'Становська Т. П.',
+                        'Мазурок І. Є.',
+                        'Мазурок Т. Л.',
+                        'Ломовцев П. Б.',
+                        'Антонова А. Б.',
+                        'Селіванова А. В.',
+                        'Ольшевская',
+                        'Котлик С. В.',
+                        'Корнієнко Ю. К.',
+                        'Тройнина',
+                        'Сіромля С. Г.',
+                        'Швець Н. В.',
+                        'Попков Д. М.',
+                        'Владімірова В. Б.',
+                        'Бодюл О. С.']
+
+        self.lectors.sort()
+        self.subjects.sort()
+        self.assisstents = ['Плотніков В. М.',
+                        'Становська Т. П.',
+                        'Мазурок І. Є.',
+                        'Мазурок Т. Л.',
+                        'Ломовцев П. Б.',
+                        'Антонова А. Б.',
+                        'Селіванова А. В.',
+                        'Ольшевская',
+                        'Котлик С. В.',
+                        'Корнієнко Ю. К.',
+                        'Тройнина',
+                        'Сіромля С. Г.',
+                        'Швець Н. В.',
+                        'Попков Д. М.',
+                        'Владімірова В. Б.',
+                        'Бодюл О. С.']
+        self.assisstents.append('Болтач С.В.')
+        self.assisstents.append('Асланов')
+        self.assisstents.append('Снігур Т.С.')
+        self.assisstents.append('Бойцова')
+        self.assisstents.append('Кононович')
+        self.assisstents.sort()
+
+        self.comboBox_Assisstents.addItems(self.assisstents)
+        self.comboBox_Lectors.addItems(self.lectors)
+        self.comboBox_Subjects.addItems(self.subjects)
+        self.pushButton_plus_asistent.clicked.connect(self.add_assisstant)
+        self.pushButton_plus_lector.clicked.connect(self.add_lector)
+        self.pushButton_minus_assisstent.clicked.connect(self.minus_assisstant)
+        self.pushButton_minus_lector.clicked.connect(self.minus_lector)
+        self.pushButton_Calculate_load.clicked.connect(self.calculate_load)
+
+    def calculate_load(self):
+        array_lectors = []
+        for item in range(self.listWidget_lectors.count()):
+            array_lectors.append(self.listWidget_lectors.item(item).text())
+        array_assisstents = []
+        for item in range(self.listWidget_assisstents.count()):
+            array_assisstents.append(self.listWidget_assisstents.item(item).text())
+        print(self.comboBox_Subjects.currentText())
+        print(array_lectors)
+        print(array_assisstents)
+
+    def add_assisstant(self):
+        self.listWidget_assisstents.addItem(self.comboBox_Assisstents.currentText())
+
+    def add_lector(self):
+        self.listWidget_lectors.addItem(self.comboBox_Lectors.currentText())
+
+    def minus_assisstant(self):
+        try:
+            self.listWidget_assisstents.takeItem(self.listWidget_assisstents.currentRow())
+        except AttributeError:
+            error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning,
+                                          "Delete item", "You didn't select item", QtWidgets.QMessageBox.Ok)
+            error.exec_()
+
+    def minus_lector(self):
+        try:
+            self.listWidget_lectors.takeItem(self.listWidget_lectors.currentRow())
+        except AttributeError:
+            error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning,
+                                          "Delete item", "You didn't select item", QtWidgets.QMessageBox.Ok)
+            error.exec_()
 
     def load_file(self):
         files_name = QtWidgets.QFileDialog.getOpenFileNames(self, "Open File", "resources", "XLS files (*.xls *.xlsx)")
@@ -52,7 +191,9 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.comboBox_4.addItems(self.only_file_name)
 
             except FileNotFoundError:
-                QtWidgets.QMessageBox("Open Source File", "Failed to read file\n'%s'")
+                error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning,
+                                              "Open Source File", "Failed to read file'", QtWidgets.QMessageBox.Ok)
+                error.exec_()
             return
 
     def load_file_rnp(self):
