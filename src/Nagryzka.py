@@ -343,9 +343,6 @@ class Nagryzka:
                 colums = colums + 1
             rows = rows + 1
 
-        print(den)
-        print(zaoch)
-        print(dict1_tripleCond)
         wt.save("Розподіл навантаження.xlsx")
         wt.close()
         wd.close()

@@ -28,7 +28,6 @@ class doc1:
                 den1[26] + den2[26] + zaoch1[26] + zaoch2[26], den1[27] + den2[27] + zaoch1[27] + zaoch2[27]]
 
         wb: Workbook = Workbook()
-        ws = wb.active
         ws = wb["Sheet"]
         wcell1 = ws.cell(1, 1)
         wcell1.value = "Загальні данні"
@@ -116,7 +115,6 @@ class doc1:
         wcell42.value = "Додаткові години"
         wcell43 = ws.cell(3, 21)
         wcell43.value = zagal[20]
-        wcell44 = ws.cell(2, 22)
         #По семестрам
         wb.create_sheet("По семестрам")
         ws = wb["По семестрам"]
@@ -484,6 +482,5 @@ class doc1:
         wcell44.value = "Всього"
         wcell45 = ws.cell(15, 22)
         wcell45.value = zaoch2[28]
-        wcell46 = ws.cell(14, 23)
         wb.save(save_file[0])
         wb.close()
