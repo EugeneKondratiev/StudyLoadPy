@@ -1,6 +1,7 @@
 from PyQt5 import QtWidgets
 
 from src.Doc1 import doc1
+from src.Nagryzka import Nagryzka
 from src.convert import ConverterXLS
 from src.design import Ui_MainWindow
 from src.pars import pars
@@ -103,9 +104,15 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
         array_assisstents = []
         for item in range(self.listWidget_assisstents.count()):
             array_assisstents.append(self.listWidget_assisstents.item(item).text())
-        print(self.comboBox_Subjects.currentText())
-        print(array_lectors)
-        print(array_assisstents)
+        nagr = Nagryzka(self.default_file_names[self.comboBox.currentIndex()],
+                        self.default_file_names[self.comboBox_4.currentIndex()],
+                        self.default_file_names[self.comboBox_2.currentIndex()],
+                        self.default_file_names[self.comboBox_5.currentIndex()],
+                        array_lectors,
+                        array_assisstents,
+                        len(array_lectors),
+                        len(array_assisstents),
+                        self.comboBox_Subjects.currentText())
 
     def add_assisstant_db(self):
         self.listWidget_assisstents_db.addItem(self.lineEdit_Assisstent.text())

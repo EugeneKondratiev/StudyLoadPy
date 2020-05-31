@@ -4,24 +4,20 @@ import numpy as np
 
 
 class Nagryzka:
-    def __init__(self):
-        wd = load_workbook(
-            "C:\\Users\\GreamReaper\\PycharmProjects\\StudyLoadPy1\\src\\resources\\ІТтаКБ. Сем I. Форма навчання  денна.xlsx")
-        ws = load_workbook(
-            "C:\\Users\\GreamReaper\\PycharmProjects\\StudyLoadPy1\\src\\resources\\ІТтаКБ. Сем I. Форма навчання  заочна.xlsx")
-        wq = load_workbook(
-            "C:\\Users\\GreamReaper\\PycharmProjects\\StudyLoadPy1\\src\\resources\\ІТтаКБ. Сем II. Форма навчання  денна.xlsx")
-        ww = load_workbook(
-            "C:\\Users\\GreamReaper\\PycharmProjects\\StudyLoadPy1\\src\\resources\\ІТтаКБ. Сем II. Форма навчання  заочна.xlsx")
+    def __init__(self, file_name_1sem_den, file_name_1sem_zaoch, file_name_2sem_den, file_name_2sem_zaoch, PIB_lec, PIB_ass, count_lec, count_ass, subject):
+        wd = load_workbook(file_name_1sem_den)
+        ws = load_workbook(file_name_1sem_zaoch)
+        wq = load_workbook(file_name_2sem_den)
+        ww = load_workbook(file_name_2sem_zaoch)
         denna2: Worksheet = wq.active
         zaochna2: Worksheet = ww.active
         denna1: Worksheet = wd.active
         zaochna1: Worksheet = ws.active
-        piblek = ["Величковский", "Кондратьев"]
-        pibass = ["Величковский", "Кондратьев", "Зипопа", "Зикака"]
-        countlek = 2
-        countass = 4
-        predmet = "Основи автоматизованого проектування складних об`єктiв i систем"
+        piblek = PIB_lec
+        pibass = PIB_ass
+        countlek = count_lec
+        countass = count_ass
+        predmet = subject
         chasy = []
         chasy2 = []
         lektor = []
@@ -161,8 +157,10 @@ class Nagryzka:
             if predmet == y:
                 chasy2 = c
 
-
-        wt = load_workbook("C:\\Users\\GreamReaper\\PycharmProjects\\StudyLoadPy1\\src\\росподіл навантаження.xlsx")
+        try:
+            wt = load_workbook("Розподіл навантаження.xlsx")
+        except FileNotFoundError:
+            wt: Workbook = Workbook()
         sheetnames = wt.sheetnames
         sheetequal = False
         for i in range (0, len(sheetnames)):
@@ -170,7 +168,7 @@ class Nagryzka:
                 sheetequal = True
 
         if sheetequal != True:
-            wt.create_sheet(predmet)
+            wt.create_sheet(predmet[:30])
         wc = wt[predmet]
 
         for i in range(0, len(chasy)):
@@ -348,7 +346,7 @@ class Nagryzka:
         print(den)
         print(zaoch)
         print(dict1_tripleCond)
-        wt.save("росподіл навантаження.xlsx")
+        wt.save("Розподіл навантаження.xlsx")
         wt.close()
         wd.close()
         ws.close()
