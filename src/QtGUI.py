@@ -1,8 +1,9 @@
-from PyQt5 import QtWidgets, Qt
+from PyQt5 import QtWidgets, Qt, QtCore
 
 from src.Doc1 import doc1
 from src.Nagryzka import Nagryzka
 from src.convert import ConverterXLS
+from src.countC import CountC
 from src.design import Ui_MainWindow
 from src.pars import pars
 from openpyxl import *
@@ -39,6 +40,25 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
         self.pushButton_minus_predmet_db.clicked.connect(self.remove_subject_db)
         self.pushButton_Save_db.clicked.connect(self.save_db)
         self.pushButton_Calculate_load.clicked.connect(self.calculate_load)
+        self.comboBox_Subjects.currentTextChanged.connect(self.on_change_value)
+
+    def on_change_value(self):
+        if self.comboBox.currentText() != '' and self.comboBox_2.currentText() != '' and self.comboBox_4.currentText() != '' and self.comboBox_5.currentText() != '':
+            countC_object = CountC(self.default_file_names[self.comboBox.currentIndex()],
+                                   self.default_file_names[self.comboBox_4.currentIndex()],
+                                   self.default_file_names[self.comboBox_2.currentIndex()],
+                                   self.default_file_names[self.comboBox_5.currentIndex()],
+                                   self.comboBox_Subjects.currentText())
+            _translate = QtCore.QCoreApplication.translate
+            self.label_lect_1sem.setText(_translate("MainWindow", str(int(countC_object.sem1_lektor))))
+            self.label_lect_1sem_2.setText(_translate("MainWindow", str(int(countC_object.sem1_ass))))
+            self.label_lect_1sem_3.setText(_translate("MainWindow", str(int(countC_object.sem2_lektor))))
+            self.label_lect_1sem_4.setText(_translate("MainWindow", str(int(countC_object.sem2_ass))))
+        else:
+            error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning,
+                                          "Часи навантаження", "Відкрийте файли кафедри!",
+                                          QtWidgets.QMessageBox.Ok)
+            error.exec_()
 
     def save_db(self):
         workBookDB = load_workbook("resources\\DB_study_load.xlsx")
@@ -120,9 +140,9 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
             info.exec_()
         except:
             error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning,
-                                          "Розподіл навантаження", "Неправильна конфігурація!", QtWidgets.QMessageBox.Ok)
+                                          "Розподіл навантаження", "Неправильна конфігурація!",
+                                          QtWidgets.QMessageBox.Ok)
             error.exec_()
-
 
     def add_assisstant_db(self):
         if len(self.listWidget_assisstents_db.findItems(self.lineEdit_Assisstent.text(), Qt.Qt.MatchExactly)) == 0:

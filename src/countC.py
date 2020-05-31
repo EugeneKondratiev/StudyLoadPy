@@ -4,8 +4,8 @@ from openpyxl.worksheet.worksheet import Worksheet
 import numpy as np
 
 
-class countC:
-    def __init__(self, file_name_1sem_den, file_name_1sem_zaoch, file_name_2sem_den, file_name_2sem_zaoch, count_lec, count_ass, subject):
+class CountC:
+    def __init__(self, file_name_1sem_den, file_name_1sem_zaoch, file_name_2sem_den, file_name_2sem_zaoch, subject):
         wd = load_workbook(file_name_1sem_den)
         ws = load_workbook(file_name_1sem_zaoch)
         wq = load_workbook(file_name_2sem_den)
@@ -14,8 +14,6 @@ class countC:
         zaochna2: Worksheet = ww.active
         denna1: Worksheet = wd.active
         zaochna1: Worksheet = ws.active
-        countlek = count_lec
-        countass = count_ass
         predmet = subject
         chasy = []
         chasy2 = []
@@ -153,25 +151,28 @@ class countC:
 
         for i in range(0, len(chasy)):
             if i == 0 or i == 3 or i == 4 or i == 5 or i == 6 or i == 7 or i == 8 or i == 9 or i == 10 or i == 11 or i == 12 or i == 15 or i == 16:
-                lektor.append(chasy[i] / countlek)
+                lektor.append(chasy[i])
             elif i != 17:
-                ass.append(chasy[i] / countass)
+                ass.append(chasy[i])
 
         for i in range(0, len(chasy2)):
             if i == 0 or i == 3 or i == 4 or i == 5 or i == 6 or i == 7 or i == 8 or i == 9 or i == 10 or i == 11 or i == 12 or i == 15 or i == 16:
-                lektor2.append(chasy2[i] / countlek)
+                lektor2.append(chasy2[i])
             elif i != 17:
-                ass2.append(chasy2[i] / countass)
+                ass2.append(chasy2[i])
 
-        nympyarray1 = np.array(lektor)
-        nympyarray2 = np.array(lektor2)
-        nympyarray3 = np.array(nympyarray1 + nympyarray2)
-        lektor_obch = nympyarray3
+        # nympyarray1 = np.array(lektor)
+        # nympyarray2 = np.array(lektor2)
+        # nympyarray3 = np.array(nympyarray1 + nympyarray2)
+        # lektor_obch = nympyarray3
+        #
+        # nympyarray1 = np.array(ass)
+        # nympyarray2 = np.array(ass2)
+        # nympyarray3 = np.array(nympyarray1 + nympyarray2)
+        # ass_obch = nympyarray3
 
-        nympyarray1 = np.array(ass)
-        nympyarray2 = np.array(ass2)
-        nympyarray3 = np.array(nympyarray1 + nympyarray2)
-        ass_obch = nympyarray3
     #CОБСТВЕННО ВОТ ЦиФРА
-        self.obchaya_ass = np.sum(ass_obch)
-        self.obchaya_lektor = np.sum(lektor_obch)
+        self.sem1_ass = np.sum(ass)
+        self.sem1_lektor = np.sum(lektor)
+        self.sem2_ass = np.sum(ass2)
+        self.sem2_lektor = np.sum(lektor2)
