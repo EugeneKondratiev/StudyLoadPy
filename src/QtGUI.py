@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, Qt
 
 from src.Doc1 import doc1
 from src.Nagryzka import Nagryzka
@@ -49,17 +49,17 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
         for i in range(2, sheet.max_row):
             w_cell = sheet.cell(row=i, column=2)
             w_cell.value = ""
-        for i in range(2, sheet.max_row+10):
+        for i in range(2, sheet.max_row + 10):
             w_cell = sheet.cell(row=i, column=3)
             w_cell.value = ""
         for i in range(0, self.listWidget_subjects_db.count()):
-            w_cell = sheet.cell(row=i+2, column=3)
+            w_cell = sheet.cell(row=i + 2, column=3)
             w_cell.value = self.listWidget_subjects_db.item(i).text()
         for i in range(0, self.listWidget_lectors_db.count()):
-            w_cell = sheet.cell(row=i+2, column=1)
+            w_cell = sheet.cell(row=i + 2, column=1)
             w_cell.value = self.listWidget_lectors_db.item(i).text()
         for i in range(0, self.listWidget_assisstents_db.count()):
-            w_cell = sheet.cell(row=i+2, column=2)
+            w_cell = sheet.cell(row=i + 2, column=2)
             w_cell.value = self.listWidget_assisstents_db.item(i).text()
         workBookDB.save("resources\\DB_study_load.xlsx")
         workBookDB.close()
@@ -104,27 +104,67 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
         array_assisstents = []
         for item in range(self.listWidget_assisstents.count()):
             array_assisstents.append(self.listWidget_assisstents.item(item).text())
-        nagr = Nagryzka(self.default_file_names[self.comboBox.currentIndex()],
-                        self.default_file_names[self.comboBox_4.currentIndex()],
-                        self.default_file_names[self.comboBox_2.currentIndex()],
-                        self.default_file_names[self.comboBox_5.currentIndex()],
-                        array_lectors,
-                        array_assisstents,
-                        len(array_lectors),
-                        len(array_assisstents),
-                        self.comboBox_Subjects.currentText())
+        try:
+            nagr = Nagryzka(self.default_file_names[self.comboBox.currentIndex()],
+                            self.default_file_names[self.comboBox_4.currentIndex()],
+                            self.default_file_names[self.comboBox_2.currentIndex()],
+                            self.default_file_names[self.comboBox_5.currentIndex()],
+                            array_lectors,
+                            array_assisstents,
+                            len(array_lectors),
+                            len(array_assisstents),
+                            self.comboBox_Subjects.currentText())
+            info = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Information,
+                                         "Розподіл навантаження", "Розподілення виконано успішно!",
+                                         QtWidgets.QMessageBox.Ok)
+            info.exec_()
+        except:
+            error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning,
+                                          "Розподіл навантаження", "Неправильна конфігурація!", QtWidgets.QMessageBox.Ok)
+            error.exec_()
+
 
     def add_assisstant_db(self):
-        self.listWidget_assisstents_db.addItem(self.lineEdit_Assisstent.text())
-        self.lineEdit_Assisstent.clear()
+        if len(self.listWidget_assisstents_db.findItems(self.lineEdit_Assisstent.text(), Qt.Qt.MatchExactly)) == 0:
+            self.listWidget_assisstents_db.addItem(self.lineEdit_Assisstent.text())
+            self.lineEdit_Assisstent.clear()
+            info = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Information,
+                                         "Асистент", "Асистент був доданий до списку!",
+                                         QtWidgets.QMessageBox.Ok)
+            info.exec_()
+        else:
+            error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning,
+                                          "Асистент", "Такий вже є!",
+                                          QtWidgets.QMessageBox.Ok)
+            error.exec_()
 
     def add_lector_db(self):
-        self.listWidget_lectors_db.addItem(self.lineEdit_Lector.text())
-        self.lineEdit_Lector.clear()
+        if len(self.listWidget_lectors_db.findItems(self.lineEdit_Lector.text(), Qt.Qt.MatchExactly)) == 0:
+            self.listWidget_lectors_db.addItem(self.lineEdit_Lector.text())
+            self.lineEdit_Lector.clear()
+            info = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Information,
+                                         "Лектор", "Лектор був доданий до списку!",
+                                         QtWidgets.QMessageBox.Ok)
+            info.exec_()
+        else:
+            error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning,
+                                          "Лектор", "Такий вже є!",
+                                          QtWidgets.QMessageBox.Ok)
+            error.exec_()
 
     def add_subject_db(self):
-        self.listWidget_subjects_db.addItem(self.lineEdit_predmet.text())
-        self.lineEdit_predmet.clear()
+        if len(self.listWidget_subjects_db.findItems(self.lineEdit_predmet.text(), Qt.Qt.MatchExactly)) == 0:
+            self.listWidget_subjects_db.addItem(self.lineEdit_predmet.text())
+            self.lineEdit_predmet.clear()
+            info = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Information,
+                                         "Предмет", "Предмет був доданий до списку!",
+                                         QtWidgets.QMessageBox.Ok)
+            info.exec_()
+        else:
+            error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning,
+                                          "Предмет", "Такий вже є!",
+                                          QtWidgets.QMessageBox.Ok)
+            error.exec_()
 
     def remove_assisstant_db(self):
         self.listWidget_assisstents_db.takeItem(self.listWidget_assisstents_db.currentRow())
@@ -233,7 +273,8 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
             self.comboBox_3.addItems(temp_array)
 
         except IndexError:
-            error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning, "Convert File", "Failed to convert file\n", QtWidgets.QMessageBox.Ok)
+            error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning, "Convert File", "Failed to convert file\n",
+                                          QtWidgets.QMessageBox.Ok)
             error.exec_()
         return
 
@@ -260,7 +301,7 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
     def create_report(self):
         try:
             save_name = QtWidgets.QFileDialog.getSaveFileName(self, "Save File", "resources",
-                                                                "XLS files (*.xls *.xlsx)")
+                                                              "XLS files (*.xls *.xlsx)")
             report_Objcet = doc1(save_name, self.default_file_names[self.comboBox.currentIndex()],
                                  self.default_file_names[self.comboBox_2.currentIndex()],
                                  self.default_file_names[self.comboBox_4.currentIndex()],
@@ -271,7 +312,8 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
                                          QtWidgets.QMessageBox.Ok)
             info.exec_()
         except:
-            error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning, "Report File", "Failed to create report file\n",
+            error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning, "Report File",
+                                          "Failed to create report file\n",
                                           QtWidgets.QMessageBox.Ok)
             error.exec_()
         return
