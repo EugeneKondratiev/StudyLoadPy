@@ -24,6 +24,11 @@ class CountC:
         den = {}
         zaoch = {}
         c = []
+        podgrup1 = 0
+        podgrup2 = 0
+        podgrup_ass = [4, 5]
+        podgrup_denna = []
+        podgrup_zaocna = []
 
         for i in range(18, denna1.max_row):
             if denna1.cell(row=i, column=2).value != None and denna1.cell(row=i, column=2).value != 0:
@@ -76,6 +81,7 @@ class CountC:
                     nympyarray3 = np.array(nympyarray1 + nympyarray2)
                     dict1_tripleCond[k] = nympyarray3.tolist()
                     ikval = True
+
             if ikval == False:
                 dict1_tripleCond[temp] = v
                 dict1_tripleCond[k] = c

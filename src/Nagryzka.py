@@ -88,6 +88,20 @@ class Nagryzka:
                     nympyarray3 = np.array(nympyarray1 + nympyarray2)
                     dict1_tripleCond[k] = nympyarray3.tolist()
                     ikval = True
+                for i in range(1, denna1.max_column):
+                    if k == denna2.cell(row=i, column=2).value and k == predmet:
+                        podgrup_denna.append(denna1.cell(row=i, column=7).value)
+                        if k == zaochna1.cell(row=i, column=2).value and k == predmet:
+                            podgrup_zaocna .append(zaochna1.cell(row=i, column=7).value)
+                            nympyarray4 = np.array(podgrup_denna)
+                            nympyarray5 = np.array(podgrup_zaocna)
+                            nympyarray6 = np.array(nympyarray4 + nympyarray5)
+                            podgrup2 = nympyarray6
+                        elif k == denna2.cell(row=i, column=2).value and k !=None:
+                            podgrup2 = denna2.cell.cell(row=i, column=7)
+
+                    elif temp == zaochna2.cell(row=i, column=2).value and k !=None:
+                        podgrup2 = zaochna2.cell.cell(row=i, column=7)
             if ikval== False:
                 dict1_tripleCond[temp] = v
                 dict1_tripleCond[k] = c
@@ -106,20 +120,6 @@ class Nagryzka:
                     nympyarray2 = np.array(c)
                     nympyarray3 = np.array(nympyarray1 + nympyarray2)
                     den2[t] = nympyarray3.tolist()
-                    for i in range(1, denna1.max_column):
-                        if k == denna2.cell(row=i, column=2).value and k == predmet:
-                            podgrup_denna.append(denna1.cell(row=i, column=7).value)
-                            if k == zaochna1.cell(row=i, column=2).value and k == predmet:
-                                podgrup_zaocna .append(zaochna1.cell(row=i, column=7).value)
-                                nympyarray4 = np.array(podgrup_denna)
-                                nympyarray5 = np.array(podgrup_zaocna)
-                                nympyarray6 = np.array(nympyarray4 + nympyarray5)
-                                podgrup2 = nympyarray6
-                            elif k == denna2.cell(row=i, column=2).value and k !=None:
-                                podgrup2 = denna2.cell.cell(row=i, column=7)
-
-                        elif temp == zaochna2.cell(row=i, column=2).value and k !=None:
-                            podgrup2 = zaochna2.cell.cell(row=i, column=7)
                 else:
                     den2[k] = c
 
@@ -162,20 +162,19 @@ class Nagryzka:
                     nympyarray3 = np.array(nympyarray1 + nympyarray2)
                     dict2_tripleCond[k] = nympyarray3.tolist()
                     ikval = True
-                    for i in range(1, denna1.max_column):
-                        if k == denna1.cell(row=i, column=2).value and k == predmet:
-                            podgrup_denna.append(denna1.cell(row=i, column=7).value)
-                            if k == zaochna1.cell(row=i, column=2).value and k == predmet:
-                                podgrup_zaocna .append(zaochna1.cell(row=i, column=7).value)
-                                nympyarray4 = np.array(podgrup_denna)
-                                nympyarray5 = np.array(podgrup_zaocna)
-                                nympyarray6 = np.array(nympyarray4 + nympyarray5)
-                                podgrup1 = nympyarray6
-                            elif k == denna1.cell(row=i, column=2).value and k !=None:
-                                podgrup1 = denna1.cell.cell(row=i, column=7)
-
-                        elif temp == zaochna1.cell(row=i, column=2).value and k !=None:
-                            podgrup1 = zaochna1.cell.cell(row=i, column=7)
+                for i in range(1, denna1.max_column):
+                    if k == denna1.cell(row=i, column=2).value and k == predmet:
+                        podgrup_denna.append(denna1.cell(row=i, column=7).value)
+                        if k == zaochna1.cell(row=i, column=2).value and k == predmet:
+                            podgrup_zaocna.append(zaochna1.cell(row=i, column=7).value)
+                            nympyarray4 = np.array(podgrup_denna)
+                            nympyarray5 = np.array(podgrup_zaocna)
+                            nympyarray6 = np.array(nympyarray4 + nympyarray5)
+                            podgrup1 = nympyarray6
+                        elif k == denna1.cell(row=i, column=2).value and k != None:
+                            podgrup1 = denna1.cell.cell(row=i, column=7)
+                    elif temp == zaochna1.cell(row=i, column=2).value and k != None:
+                        podgrup1 = zaochna1.cell.cell(row=i, column=7)
 
             if ikval== False:
                 dict2_tripleCond[temp] = v
