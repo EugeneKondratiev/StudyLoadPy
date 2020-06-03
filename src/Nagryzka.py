@@ -15,6 +15,12 @@ class Nagryzka:
         zaochna1: Worksheet = ws.active
         piblek = PIB_lec
         pibass = PIB_ass
+        podgrup1 = 0
+        podgrup2 = 0
+        #podgrup_ass НУЖНО ДОБАВИТЬ
+        podgrup_ass = [4, 5]
+        podgrup_denna = []
+        podgrup_zaocna = []
         countlek = count_lec
         countass = count_ass
         predmet = subject
@@ -99,6 +105,20 @@ class Nagryzka:
                     nympyarray2 = np.array(c)
                     nympyarray3 = np.array(nympyarray1 + nympyarray2)
                     den2[t] = nympyarray3.tolist()
+                    for i in range(1, denna1.max_column):
+                        if k == denna2.cell(row=i, column=2).value and k == predmet:
+                            podgrup_denna.append(denna1.cell(row=i, column=7).value)
+                            if k == zaochna1.cell(row=i, column=2).value and k == predmet:
+                                podgrup_zaocna .append(zaochna1.cell(row=i, column=7).value)
+                                nympyarray4 = np.array(podgrup_denna)
+                                nympyarray5 = np.array(podgrup_zaocna)
+                                nympyarray6 = np.array(nympyarray4 + nympyarray5)
+                                podgrup2 = nympyarray6
+                            elif k == denna2.cell(row=i, column=2).value and k !=None:
+                                podgrup2 = denna2.cell.cell(row=i, column=7)
+
+                        elif temp == zaochna2.cell(row=i, column=2).value and k !=None:
+                            podgrup2 = zaochna2.cell.cell(row=i, column=7)
                 else:
                     den2[k] = c
 
@@ -141,6 +161,21 @@ class Nagryzka:
                     nympyarray3 = np.array(nympyarray1 + nympyarray2)
                     dict2_tripleCond[k] = nympyarray3.tolist()
                     ikval = True
+                    for i in range(1, denna1.max_column):
+                        if k == denna1.cell(row=i, column=2).value and k == predmet:
+                            podgrup_denna.append(denna1.cell(row=i, column=7).value)
+                            if k == zaochna1.cell(row=i, column=2).value and k == predmet:
+                                podgrup_zaocna .append(zaochna1.cell(row=i, column=7).value)
+                                nympyarray4 = np.array(podgrup_denna)
+                                nympyarray5 = np.array(podgrup_zaocna)
+                                nympyarray6 = np.array(nympyarray4 + nympyarray5)
+                                podgrup1 = nympyarray6
+                            elif k == denna1.cell(row=i, column=2).value and k !=None:
+                                podgrup1 = denna1.cell.cell(row=i, column=7)
+
+                        elif temp == zaochna1.cell(row=i, column=2).value and k !=None:
+                            podgrup1 = zaochna1.cell.cell(row=i, column=7)
+
             if ikval== False:
                 dict2_tripleCond[temp] = v
                 dict2_tripleCond[k] = c
@@ -175,13 +210,13 @@ class Nagryzka:
             if i == 0 or i == 3 or i == 4 or i == 5 or i == 6 or i == 7 or i == 8 or i == 9 or i == 10 or i == 11 or i == 12 or i == 15 or i == 16:
                 lektor.append(chasy[i] / countlek)
             elif i != 17:
-                ass.append(chasy[i] / countass)
+                ass.append(chasy[i] / podgrup1)
 
         for i in range(0, len(chasy2)):
             if i == 0 or i == 3 or i == 4 or i == 5 or i == 6 or i == 7 or i == 8 or i == 9 or i == 10 or i == 11 or i == 12 or i == 15 or i == 16:
                 lektor2.append(chasy2[i] / countlek)
             elif i != 17:
-                ass2.append(chasy2[i] / countass)
+                ass2.append(chasy2[i] / podgrup2)
 
         wcell1 = wc.cell(12, 1)
         wcell1.value = "Семестр 2 "
@@ -225,6 +260,8 @@ class Nagryzka:
         wcell1.value = "Кер-тво аспірантами, здобувачами"
         wcell1 = wc.cell(16, 5)
         wcell1.value = "Кер-тво практ."
+        wcell1 = wc.cell(16, 6)
+        wcell1.value = "Кількісль Підгруп."
 
         rows = 14
         # ФИО лекторов
@@ -258,7 +295,7 @@ class Nagryzka:
             colums = 2
             for j in range(0, len(ass2)):
                 wcell5 = wc.cell(rows, colums)
-                wcell5.value = ass2[j]
+                wcell5.value = ass2[j] * podgrup_ass
                 colums = colums + 1
             rows = rows + 1
 
@@ -302,6 +339,8 @@ class Nagryzka:
         wcell1.value = "Кер-тво аспірантами, здобувачами"
         wcell1 = wc.cell(5, 5)
         wcell1.value = "Кер-тво практ."
+        wcell1 = wc.cell(5, 6)
+        wcell1.value = "Кількісль Підгруп."
         #Название предмета
         wcell1 = wc.cell(1, 1)
         wcell1.value = predmet
@@ -339,9 +378,12 @@ class Nagryzka:
             colums = 2
             for j in range(0, len(ass)):
                 wcell5 = wc.cell(rows, colums)
-                wcell5.value = ass[j]
+                wcell5.value = ass[j] * podgrup_ass[i]
                 colums = colums + 1
+            wcell6 = wc.cell(rows, colums)
+            wcell6.value = podgrup_ass[i]
             rows = rows + 1
+
 
         wt.save("Розподіл навантаження.xlsx")
         wt.close()
