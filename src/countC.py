@@ -26,9 +26,6 @@ class CountC:
         c = []
         podgrup1 = 0
         podgrup2 = 0
-        podgrup_ass = [4, 5]
-        podgrup_denna = []
-        podgrup_zaocna = []
 
         for i in range(18, denna1.max_row):
             if denna1.cell(row=i, column=2).value != None and denna1.cell(row=i, column=2).value != 0:
@@ -75,6 +72,9 @@ class CountC:
         for (temp, v) in den.items():
             ikval = False
             for (k, c) in zaoch.items():
+                for i in range(1, denna1.max_column):
+                    if predmet == denna1.cell(row=i, column=2).value and k == predmet:
+                        podgrup1 = denna1.cell(row=i, column=7).value + zaochna1.cell(row=i, column=7).value
                 if temp == k and temp != None:
                     nympyarray1 = np.array(v)
                     nympyarray2 = np.array(c)
@@ -85,6 +85,12 @@ class CountC:
             if ikval == False:
                 dict1_tripleCond[temp] = v
                 dict1_tripleCond[k] = c
+
+        for i in range(1, denna1.max_column):
+            if predmet == denna1.cell(row=i, column=2).value:
+                podgrup1 = denna1.cell(row=i, column=7).value
+            elif predmet == zaochna1.cell(row=i, column=2).value:
+                podgrup1 = zaochna1.cell(row=i, column=7).value
 
         den2 = {}
         zaoch2 = {}
@@ -146,6 +152,12 @@ class CountC:
                 dict2_tripleCond[temp] = v
                 dict2_tripleCond[k] = c
 
+        for i in range(1, denna2.max_column):
+            if predmet == denna2.cell(row=i, column=2).value:
+                podgrup2 = denna2.cell(row=i, column=7).value
+            elif predmet == zaochna2.cell(row=i, column=2).value:
+                podgrup2 = zaochna2.cell(row=i, column=7).value
+
         for (k, c) in dict1_tripleCond.items():
             if predmet == k:
                 chasy = c
@@ -167,6 +179,10 @@ class CountC:
             elif i != 17:
                 ass2.append(chasy2[i])
 
+
+
+
+
         # nympyarray1 = np.array(lektor)
         # nympyarray2 = np.array(lektor2)
         # nympyarray3 = np.array(nympyarray1 + nympyarray2)
@@ -178,6 +194,7 @@ class CountC:
         # ass_obch = nympyarray3
 
     #CОБСТВЕННО ВОТ ЦиФРА
+        self.podgrup = podgrup1 + podgrup2
         self.sem1_ass = np.sum(ass)
         self.sem1_lektor = np.sum(lektor)
         self.sem2_ass = np.sum(ass2)
