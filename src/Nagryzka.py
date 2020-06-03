@@ -84,9 +84,9 @@ class Nagryzka:
                 if temp == k and temp != None:
                     for i in range(1, denna1.max_column):
                         if predmet == denna1.cell(row=i, column=2).value and k == predmet:
-                            grypp1 = denna1.cell(row=i, column=5).value + zaochna1.cell(row=i, column=7).value
+                            grypp1 = denna1.cell(row=i, column=5).value + zaochna1.cell(row=i, column=5).value
                         if predmet == denna1.cell(row=i, column=2).value and k == predmet:
-                            kolvo_styd1 = denna1.cell(row=i, column=4).value + zaochna1.cell(row=i, column=7).value
+                            kolvo_styd1 = denna1.cell(row=i, column=4).value + zaochna1.cell(row=i, column=4).value
                         if predmet == denna1.cell(row=i, column=2).value and k == predmet:
                             podgrup1 = denna1.cell(row=i, column=7).value + zaochna1.cell(row=i, column=7).value
                     nympyarray1 = np.array(v)
@@ -415,7 +415,7 @@ class Nagryzka:
                 colums = 2
                 for j in range(0, len(ass)):
                     wcell5 = wc.cell(rows, colums)
-                    wcell5.value = ass[j] * podgrup_ass[i]
+                    wcell5.value = int(ass[j]) * int(podgrup_ass[i])
                     colums = colums + 1
                 wcell6 = wc.cell(rows, colums)
                 wcell6.value = podgrup_ass[i]

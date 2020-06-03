@@ -54,6 +54,8 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
             self.label_lect_1sem_2.setText(_translate("MainWindow", str(int(countC_object.sem1_ass))))
             self.label_lect_1sem_3.setText(_translate("MainWindow", str(int(countC_object.sem2_lektor))))
             self.label_lect_1sem_4.setText(_translate("MainWindow", str(int(countC_object.sem2_ass))))
+            self.label_pidgrup_1sem.setText(_translate("MainWindow", str(countC_object.podgrup_1sem)))
+            self.label_pidgrup_2sem.setText(_translate("MainWindow", str(countC_object.podgrup_2sem)))
         else:
             error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning,
                                           "Часи навантаження", "Відкрийте файли кафедри!",
@@ -253,6 +255,10 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.comboBox_2.addItems(self.only_file_name)
                 self.comboBox_5.addItems(self.only_file_name)
                 self.comboBox_4.addItems(self.only_file_name)
+                self.comboBox.setCurrentIndex(0)
+                self.comboBox_2.setCurrentIndex(2)
+                self.comboBox_5.setCurrentIndex(3)
+                self.comboBox_4.setCurrentIndex(1)
 
             except FileNotFoundError:
                 error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning,

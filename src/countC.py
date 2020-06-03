@@ -194,7 +194,8 @@ class CountC:
         # ass_obch = nympyarray3
 
     #CОБСТВЕННО ВОТ ЦиФРА
-        self.podgrup = podgrup1 + podgrup2
+        self.podgrup_1sem = podgrup1
+        self.podgrup_2sem = podgrup2
         self.sem1_ass = np.sum(ass)
         self.sem1_lektor = np.sum(lektor)
         self.sem2_ass = np.sum(ass2)
