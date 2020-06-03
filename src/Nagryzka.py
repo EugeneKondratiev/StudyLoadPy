@@ -4,7 +4,8 @@ import numpy as np
 
 
 class Nagryzka:
-    def __init__(self, file_name_1sem_den, file_name_1sem_zaoch, file_name_2sem_den, file_name_2sem_zaoch, PIB_lec, PIB_ass, count_lec, count_ass, subject):
+    def __init__(self, file_name_1sem_den, file_name_1sem_zaoch, file_name_2sem_den, file_name_2sem_zaoch, PIB_lec,
+                 PIB_ass, count_lec, count_ass, subject, subgroup_count_array):
         wd = load_workbook(file_name_1sem_den)
         ws = load_workbook(file_name_1sem_zaoch)
         wq = load_workbook(file_name_2sem_den)
@@ -18,7 +19,7 @@ class Nagryzka:
         podgrup1 = 0
         podgrup2 = 0
         #podgrup_ass НУЖНО ДОБАВИТЬ
-        podgrup_ass = [4, 5]
+        podgrup_ass = subgroup_count_array
         podgrup_denna = []
         podgrup_zaocna = []
         countlek = count_lec

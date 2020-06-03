@@ -124,8 +124,11 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
         array_assisstents = []
         for item in range(self.listWidget_assisstents.count()):
             array_assisstents.append(self.listWidget_assisstents.item(item).text())
-        try:
-            nagr = Nagryzka(self.default_file_names[self.comboBox.currentIndex()],
+        array_subject_count = []
+        for item in range(self.listWidget_count_group.count()):
+            array_subject_count.append(self.listWidget_count_group.item(item).text())
+        #try:
+        nagr = Nagryzka(self.default_file_names[self.comboBox.currentIndex()],
                             self.default_file_names[self.comboBox_4.currentIndex()],
                             self.default_file_names[self.comboBox_2.currentIndex()],
                             self.default_file_names[self.comboBox_5.currentIndex()],
@@ -133,16 +136,17 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
                             array_assisstents,
                             len(array_lectors),
                             len(array_assisstents),
-                            self.comboBox_Subjects.currentText())
-            info = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Information,
+                            self.comboBox_Subjects.currentText(),
+                            array_subject_count)
+        info = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Information,
                                          "Розподіл навантаження", "Розподілення виконано успішно!",
                                          QtWidgets.QMessageBox.Ok)
-            info.exec_()
-        except:
-            error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning,
+        info.exec_()
+        #except:
+        error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning,
                                           "Розподіл навантаження", "Неправильна конфігурація!",
                                           QtWidgets.QMessageBox.Ok)
-            error.exec_()
+        error.exec_()
 
     def add_assisstant_db(self):
         if len(self.listWidget_assisstents_db.findItems(self.lineEdit_Assisstent.text(), Qt.Qt.MatchExactly)) == 0:
@@ -197,6 +201,7 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def add_assisstant(self):
         self.listWidget_assisstents.addItem(self.comboBox_Assisstents.currentText())
+        self.listWidget_count_group.addItem(self.comboBox_count_group.currentText())
 
     def add_lector(self):
         self.listWidget_lectors.addItem(self.comboBox_Lectors.currentText())
@@ -204,6 +209,9 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
     def minus_assisstant(self):
         try:
             self.listWidget_assisstents.takeItem(self.listWidget_assisstents.currentRow())
+            #print(int(self.listWidget_assisstents.currentItem()))
+            print(self.listWidget_assisstents.selectedItems())
+            self.listWidget_count_group.takeItem(self.listWidget_assisstents.currentRow())
         except AttributeError:
             error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning,
                                           "Delete item", "You didn't select item", QtWidgets.QMessageBox.Ok)
