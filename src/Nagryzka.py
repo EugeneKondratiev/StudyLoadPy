@@ -18,10 +18,7 @@ class Nagryzka:
         pibass = PIB_ass
         podgrup1 = 0
         podgrup2 = 0
-        #podgrup_ass НУЖНО ДОБАВИТЬ
         podgrup_ass = subgroup_count_array
-        podgrup_denna = []
-        podgrup_zaocna = []
         countlek = count_lec
         countass = count_ass
         predmet = subject
@@ -31,8 +28,10 @@ class Nagryzka:
         lektor2 = []
         ass = []
         ass2 = []
-
-
+        kolvo_styd1 = 0
+        kolvo_styd2 = 0
+        grypp1 = ""
+        grypp2 = ""
 
         den = {}
         zaoch = {}
@@ -83,28 +82,36 @@ class Nagryzka:
             ikval = False
             for (k, c) in zaoch.items():
                 if temp == k and temp != None:
+                    for i in range(1, denna1.max_column):
+                        if predmet == denna1.cell(row=i, column=2).value and k == predmet:
+                            grypp1 = denna1.cell(row=i, column=5).value + zaochna1.cell(row=i, column=7).value
+                        if predmet == denna1.cell(row=i, column=2).value and k == predmet:
+                            kolvo_styd1 = denna1.cell(row=i, column=4).value + zaochna1.cell(row=i, column=7).value
+                        if predmet == denna1.cell(row=i, column=2).value and k == predmet:
+                            podgrup1 = denna1.cell(row=i, column=7).value + zaochna1.cell(row=i, column=7).value
                     nympyarray1 = np.array(v)
                     nympyarray2 = np.array(c)
                     nympyarray3 = np.array(nympyarray1 + nympyarray2)
                     dict1_tripleCond[k] = nympyarray3.tolist()
                     ikval = True
-                for i in range(1, denna1.max_column):
-                    if k == denna2.cell(row=i, column=2).value and k == predmet:
-                        podgrup_denna.append(denna1.cell(row=i, column=7).value)
-                        if k == zaochna1.cell(row=i, column=2).value and k == predmet:
-                            podgrup_zaocna .append(zaochna1.cell(row=i, column=7).value)
-                            nympyarray4 = np.array(podgrup_denna)
-                            nympyarray5 = np.array(podgrup_zaocna)
-                            nympyarray6 = np.array(nympyarray4 + nympyarray5)
-                            podgrup2 = nympyarray6
-                        elif k == denna2.cell(row=i, column=2).value and k !=None:
-                            podgrup2 = denna2.cell.cell(row=i, column=7)
-
-                    elif temp == zaochna2.cell(row=i, column=2).value and k !=None:
-                        podgrup2 = zaochna2.cell.cell(row=i, column=7)
             if ikval== False:
                 dict1_tripleCond[temp] = v
                 dict1_tripleCond[k] = c
+        for i in range(1, denna1.max_column):
+            if predmet == denna1.cell(row=i, column=2).value:
+                grypp1 = denna1.cell(row=i, column=5).value
+            elif predmet == zaochna1.cell(row=i, column=2).value:
+                grypp1 = zaochna1.cell(row=i, column=5).value
+
+            if predmet == denna1.cell(row=i, column=2).value:
+                kolvo_styd1 = denna1.cell(row=i, column=4).value
+            elif predmet == zaochna1.cell(row=i, column=2).value:
+                kolvo_styd1 = zaochna1.cell(row=i, column=4).value
+
+            if predmet == denna1.cell(row=i, column=2).value:
+                podgrup1 = denna1.cell(row=i, column=7).value
+            elif predmet == zaochna1.cell(row=i, column=2).value:
+                podgrup1 = zaochna1.cell(row=i, column=7).value
 
         den2 = {}
         zaoch2 = {}
@@ -157,28 +164,37 @@ class Nagryzka:
             ikval = False
             for (k, c) in zaoch2.items():
                 if temp == k and temp != None:
+                    for i in range(1, denna2.max_column):
+                        if predmet == denna2.cell(row=i, column=2).value and k == predmet:
+                            grypp2 = denna2.cell(row=i, column=7).value + zaochna2.cell(row=i, column=7).value
+                        if predmet == denna2.cell(row=i, column=2).value and k == predmet:
+                            kolvo_styd2 = denna2.cell(row=i, column=7).value + zaochna2.cell(row=i, column=7).value
+                        if predmet == denna2.cell(row=i, column=2).value and k == predmet:
+                            podgrup2 = denna2.cell(row=i, column=7).value + zaochna2.cell(row=i, column=7).value
                     nympyarray1 = np.array(v)
                     nympyarray2 = np.array(c)
                     nympyarray3 = np.array(nympyarray1 + nympyarray2)
                     dict2_tripleCond[k] = nympyarray3.tolist()
                     ikval = True
-                for i in range(1, denna1.max_column):
-                    if k == denna1.cell(row=i, column=2).value and k == predmet:
-                        podgrup_denna.append(denna1.cell(row=i, column=7).value)
-                        if k == zaochna1.cell(row=i, column=2).value and k == predmet:
-                            podgrup_zaocna.append(zaochna1.cell(row=i, column=7).value)
-                            nympyarray4 = np.array(podgrup_denna)
-                            nympyarray5 = np.array(podgrup_zaocna)
-                            nympyarray6 = np.array(nympyarray4 + nympyarray5)
-                            podgrup1 = nympyarray6
-                        elif k == denna1.cell(row=i, column=2).value and k != None:
-                            podgrup1 = denna1.cell.cell(row=i, column=7)
-                    elif temp == zaochna1.cell(row=i, column=2).value and k != None:
-                        podgrup1 = zaochna1.cell.cell(row=i, column=7)
-
             if ikval== False:
                 dict2_tripleCond[temp] = v
                 dict2_tripleCond[k] = c
+
+        for i in range(1, denna2.max_column):
+            if predmet == denna2.cell(row=i, column=2).value:
+                grypp2 = denna2.cell(row=i, column=5).value
+            elif predmet == zaochna2.cell(row=i, column=2).value:
+                grypp2 = zaochna2.cell(row=i, column=5).value
+
+            if predmet == denna2.cell(row=i, column=2).value:
+                kolvo_styd2 = denna2.cell(row=i, column=4).value
+            elif predmet == zaochna2.cell(row=i, column=2).value:
+                kolvo_styd2 = zaochna2.cell(row=i, column=4).value
+
+            if predmet == denna2.cell(row=i, column=2).value:
+                podgrup2 = denna2.cell(row=i, column=7).value
+            elif predmet == zaochna2.cell(row=i, column=2).value:
+                podgrup2 = zaochna2.cell(row=i, column=7).value
 
         #НАЧАЛО КОНЦА
 
@@ -206,183 +222,204 @@ class Nagryzka:
             wt.create_sheet(predmet[:30])
         wc = wt[predmet]
 
+
         for i in range(0, len(chasy)):
-            if i == 0 or i == 3 or i == 4 or i == 5 or i == 6 or i == 7 or i == 8 or i == 9 or i == 10 or i == 11 or i == 12 or i == 15 or i == 16:
+            if i == 0 or i == 3 or i == 4 or i == 5 or i == 6 or i == 7 or i == 8 or i == 9 or i == 10 or i == 11 or i == 12 or i == 13 or i == 15:
                 lektor.append(chasy[i] / countlek)
             elif i != 17:
                 ass.append(chasy[i] / podgrup1)
 
         for i in range(0, len(chasy2)):
-            if i == 0 or i == 3 or i == 4 or i == 5 or i == 6 or i == 7 or i == 8 or i == 9 or i == 10 or i == 11 or i == 12 or i == 15 or i == 16:
+            if i == 0 or i == 3 or i == 4 or i == 5 or i == 6 or i == 7 or i == 8 or i == 9 or i == 10 or i == 11 or i == 12 or i == 13 or i == 15:
                 lektor2.append(chasy2[i] / countlek)
             elif i != 17:
                 ass2.append(chasy2[i] / podgrup2)
+        if len(ass2) != 0:
+            wcell1 = wc.cell(13, 1)
+            wcell1.value = "Семестр 2 "
+            wcell1 = wc.cell(14, 1)
+            wcell1.value = "ПІБ викладача"
+            wcell2 = wc.cell(14, 2)
+            wcell2.value = "Чит. лекцій"
+            wcell4 = wc.cell(14, 3)
+            wcell4.value = "Пров. консульт з нав. дисц. протягом семестру"
+            wcell6 = wc.cell(14, 4)
+            wcell6.value = "Пров. екзам. консультацій"
+            wcell8 = wc.cell(14, 5)
+            wcell8.value = "Керівництво і приймання КП/КР"
+            wcell10 = wc.cell(14, 6)
+            wcell10.value = "Пров. заліку"
+            wcell12 = wc.cell(14, 7)
+            wcell12.value = "Пров. сем. екз."
+            wcell14 = wc.cell(14, 8)
+            wcell14.value = "Кер-тво, консульт., реце-ня ДП"
+            wcell4 = wc.cell(14, 9)
+            wcell4.value = "Пров-ня захисту"
+            wcell4 = wc.cell(14, 10)
+            wcell4.value = "Кваліф. Іспит"
+            wcell4 = wc.cell(14, 11)
+            wcell4.value = "Кер-тво НДРС"
+            wcell4 = wc.cell(14, 12)
+            wcell4.value = "Кер-тво аспірантами, здобувачами"
+            wcell4 = wc.cell(14, 13)
+            wcell4.value = "Кер-тво практ"
+            wcell4 = wc.cell(14, 14)
+            wcell4.value = "Дист. Модуль"
+            wcell4 = wc.cell(14, 15)
+            wcell4.value = "К-сть студ"
+            wcell4 = wc.cell(14, 16)
+            wcell4.value = "Шифр групп"
+            wcell1 = wc.cell(16, 1)
+            wcell1.value = "ПІБ викладача"
+            wcell1 = wc.cell(16, 2)
+            wcell1.value = "Провед. лабор. занять"
+            wcell1 = wc.cell(16, 3)
+            wcell1.value = "Провед. практ./ семінар. занять"
+            wcell1 = wc.cell(16, 4)
+            wcell1.value = "Інші види -5%"
+            wcell1 = wc.cell(16, 5)
+            wcell1.value = "Додаткові години"
+            wcell1 = wc.cell(16, 6)
+            wcell1.value = "Кількісль Підгруп."
 
-        wcell1 = wc.cell(12, 1)
-        wcell1.value = "Семестр 2 "
-        wcell1 = wc.cell(13, 1)
-        wcell1.value = "ПІБ викладача"
-        wcell2 = wc.cell(13, 2)
-        wcell2.value = "Чит. лекцій"
-        wcell4 = wc.cell(13, 3)
-        wcell4.value = "Пров. консульт з нав. дисц. протягом семестру"
-        wcell6 = wc.cell(13, 4)
-        wcell6.value = "Пров. екзам. консультацій"
-        wcell8 = wc.cell(13, 5)
-        wcell8.value = "Керівництво і приймання КП/КР"
-        wcell10 = wc.cell(13, 6)
-        wcell10.value = "Пров. заліку"
-        wcell12 = wc.cell(13, 7)
-        wcell12.value = "Пров. сем. екз."
-        wcell14 = wc.cell(13, 8)
-        wcell14.value = "Кер-тво, консульт., реце-ня ДП"
-        wcell4 = wc.cell(13, 9)
-        wcell4.value = "Пров-ня захисту"
-        wcell4 = wc.cell(13, 10)
-        wcell4.value = "Кваліф. Іспит"
-        wcell4 = wc.cell(13, 11)
-        wcell4.value = "Кер-тво НДРС"
-        wcell4 = wc.cell(13, 12)
-        wcell4.value = "Кер-тво аспірантами, здобувачами"
-        wcell4 = wc.cell(13, 13)
-        wcell4.value = "Інші види -5%"
-        wcell4 = wc.cell(13, 14)
-        wcell4.value = "Дист. Модуль"
-        wcell4 = wc.cell(13, 15)
-        wcell4.value = "Додаткові години"
-        wcell1 = wc.cell(16, 1)
-        wcell1.value = "ПІБ викладача"
-        wcell1 = wc.cell(16, 2)
-        wcell1.value = "Провед. лабор. занять"
-        wcell1 = wc.cell(16, 3)
-        wcell1.value = "Провед. практ./ семінар. занять"
-        wcell1 = wc.cell(16, 4)
-        wcell1.value = "Кер-тво аспірантами, здобувачами"
-        wcell1 = wc.cell(16, 5)
-        wcell1.value = "Кер-тво практ."
-        wcell1 = wc.cell(16, 6)
-        wcell1.value = "Кількісль Підгруп."
+            rows = 15
+            # ФИО лекторов
+            for i in range(0, len(piblek)):
+             wcell2 = wc.cell(rows, 1)
+             wcell2.value = piblek[i]
+             rows = rows + 1
 
-        rows = 14
-        # ФИО лекторов
-        for i in range(0, len(piblek)):
-            wcell2 = wc.cell(rows, 1)
-            wcell2.value = piblek[i]
+            # ФИО асистентов
             rows = rows + 1
+            for i in range(0, len(pibass)):
+             wcell3 = wc.cell(rows, 1)
+             wcell3.value = pibass[i]
+             rows = rows + 1
 
-        # ФИО асистентов
-        rows = rows + 1
-        for i in range(0, len(pibass)):
-            wcell3 = wc.cell(rows, 1)
-            wcell3.value = pibass[i]
-            rows = rows + 1
-
-        rows = 14
-        colums = 2
-        # Часы лекторов
-        for i in range(0, len(piblek)):
+            rows = 15
             colums = 2
-            for j in range(0, len(lektor2)):
-                wcell4 = wc.cell(rows, colums)
-                wcell4.value = lektor2[j]
+            # Часы лекторов
+            for i in range(0, len(piblek)):
+                colums = 2
+                for j in range(0, len(lektor2)):
+                    wcell4 = wc.cell(rows, colums)
+                    wcell4.value = lektor2[j]
+                    colums = colums + 1
+                wcell6 = wc.cell(rows, colums)
+                wcell6.value = kolvo_styd2
                 colums = colums + 1
-            rows = rows + 1
+                wcell7 = wc.cell(rows, colums)
+                wcell7.value = grypp2
+                rows = rows + 1
 
-        colums = 2
-        rows = rows + 1
-        # Часы асистентов
-        for i in range(0, len(pibass)):
             colums = 2
-            for j in range(0, len(ass2)):
-                wcell5 = wc.cell(rows, colums)
-                wcell5.value = ass2[j] * podgrup_ass
-                colums = colums + 1
             rows = rows + 1
+            # Часы асистентов
+            for i in range(0, len(pibass)):
+                colums = 2
+                for j in range(0, len(ass2)):
+                    wcell5 = wc.cell(rows, colums)
+                    wcell5.value = ass2[j] * podgrup_ass[i]
+                    colums = colums + 1
+                wcell6 = wc.cell(rows, colums)
+                wcell6.value = podgrup_ass[i]
+                rows = rows + 1
 
-        wcell1 = wc.cell(2, 1)
-        wcell1.value = "ПІБ викладача"
-        wcell2 = wc.cell(2, 2)
-        wcell2.value = "Чит. лекцій"
-        wcell4 = wc.cell(2, 3)
-        wcell4.value = "Пров. консульт з нав. дисц. протягом семестру"
-        wcell6 = wc.cell(2, 4)
-        wcell6.value = "Пров. екзам. консультацій"
-        wcell8 = wc.cell(2, 5)
-        wcell8.value = "Керівництво і приймання КП/КР"
-        wcell10 = wc.cell(2, 6)
-        wcell10.value = "Пров. заліку"
-        wcell12 = wc.cell(2, 7)
-        wcell12.value = "Пров. сем. екз."
-        wcell14 = wc.cell(2, 8)
-        wcell14.value = "Кер-тво, консульт., реце-ня ДП"
-        wcell4 = wc.cell(2, 9)
-        wcell4.value = "Пров-ня захисту"
-        wcell4 = wc.cell(2, 10)
-        wcell4.value = "Кваліф. Іспит"
-        wcell4 = wc.cell(2, 11)
-        wcell4.value = "Кер-тво НДРС"
-        wcell4 = wc.cell(2, 12)
-        wcell4.value = "Кер-тво аспірантами, здобувачами"
-        wcell4 = wc.cell(2, 13)
-        wcell4.value = "Інші види -5%"
-        wcell4 = wc.cell(2, 14)
-        wcell4.value = "Дист. Модуль"
-        wcell4 = wc.cell(2, 15)
-        wcell4.value = "Додаткові години"
-        wcell1 = wc.cell(5, 1)
-        wcell1.value = "ПІБ викладача"
-        wcell1 = wc.cell(5, 2)
-        wcell1.value = "Провед. лабор. занять"
-        wcell1 = wc.cell(5, 3)
-        wcell1.value = "Провед. практ./ семінар. занять"
-        wcell1 = wc.cell(5, 4)
-        wcell1.value = "Кер-тво аспірантами, здобувачами"
-        wcell1 = wc.cell(5, 5)
-        wcell1.value = "Кер-тво практ."
-        wcell1 = wc.cell(5, 6)
-        wcell1.value = "Кількісль Підгруп."
-        #Название предмета
-        wcell1 = wc.cell(1, 1)
-        wcell1.value = predmet
-        rows = 3
+        if len(ass) != 0:
+            wcell1 = wc.cell(3, 1)
+            wcell1.value = "ПІБ викладача"
+            wcell2 = wc.cell(3, 2)
+            wcell2.value = "Чит. лекцій"
+            wcell4 = wc.cell(3, 3)
+            wcell4.value = "Пров. консульт з нав. дисц. протягом семестру"
+            wcell6 = wc.cell(3, 4)
+            wcell6.value = "Пров. екзам. консультацій"
+            wcell8 = wc.cell(3, 5)
+            wcell8.value = "Керівництво і приймання КП/КР"
+            wcell10 = wc.cell(3, 6)
+            wcell10.value = "Пров. заліку"
+            wcell12 = wc.cell(3, 7)
+            wcell12.value = "Пров. сем. екз."
+            wcell14 = wc.cell(3, 8)
+            wcell14.value = "Кер-тво, консульт., реце-ня ДП"
+            wcell4 = wc.cell(3, 9)
+            wcell4.value = "Пров-ня захисту"
+            wcell4 = wc.cell(3, 10)
+            wcell4.value = "Кваліф. Іспит"
+            wcell4 = wc.cell(3, 11)
+            wcell4.value = "Кер-тво НДРС"
+            wcell4 = wc.cell(3, 12)
+            wcell4.value = "Кер-тво аспірантами, здобувачами"
+            wcell4 = wc.cell(3, 13)
+            wcell4.value = "Кер-тво практ."
+            wcell4 = wc.cell(3, 14)
+            wcell4.value = "Дист. Модуль"
+            wcell4 = wc.cell(3, 15)
+            wcell4.value = "К-сть студ"
+            wcell4 = wc.cell(3, 16)
+            wcell4.value = "Шифр групп"
+            wcell1 = wc.cell(5, 1)
+            wcell1.value = "ПІБ викладача"
+            wcell1 = wc.cell(5, 2)
+            wcell1.value = "Провед. лабор. занять"
+            wcell1 = wc.cell(5, 3)
+            wcell1.value = "Провед. практ./ семінар. занять"
+            wcell1 = wc.cell(5, 4)
+            wcell1.value = "Інші види -5%"
+            wcell1 = wc.cell(5, 5)
+            wcell1.value = "Додаткові години"
+            wcell1 = wc.cell(5, 6)
+            wcell1.value = "Кількісль Підгруп."
+            #Название предмета
+            wcell1 = wc.cell(1, 1)
+            wcell1.value = predmet
 
-        #ФИО лекторов
-        for i in range(0, len(piblek)):
-            wcell2 = wc.cell(rows, 1)
-            wcell2.value = piblek[i]
+            wcell1 = wc.cell(2, 1)
+            wcell1.value = "Семестр1"
+            rows = 4
+
+            #ФИО лекторов
+            for i in range(0, len(piblek)):
+                wcell2 = wc.cell(rows, 1)
+                wcell2.value = piblek[i]
+                rows = rows + 1
+
+            #ФИО асистентов
             rows = rows + 1
-
-        #ФИО асистентов
-        rows = rows + 1
-        for i in range(0, len(pibass)):
-            wcell3 = wc.cell(rows, 1)
-            wcell3.value = pibass[i]
-            rows = rows + 1
+            for i in range(0, len(pibass)):
+                wcell3 = wc.cell(rows, 1)
+                wcell3.value = pibass[i]
+                rows = rows + 1
 
 
-        rows = 3
-        colums = 2
-        # Часы лекторов
-        for i in range(0, len(piblek)):
+            rows = 4
             colums = 2
-            for j in range(0, len(lektor)):
-                wcell4 = wc.cell(rows, colums)
-                wcell4.value = lektor[j]
+            # Часы лекторов
+            for i in range(0, len(piblek)):
+                colums = 2
+                for j in range(0, len(lektor)):
+                    wcell4 = wc.cell(rows, colums)
+                    wcell4.value = lektor[j]
+                    colums = colums + 1
+                wcell6 = wc.cell(rows, colums)
+                wcell6.value = kolvo_styd1
                 colums = colums + 1
-            rows = rows + 1
+                wcell7 = wc.cell(rows, colums)
+                wcell7.value = grypp1
+                rows = rows + 1
 
-        colums = 2
-        rows = rows + 1
-        # Часы асистентов
-        for i in range(0, len(pibass)):
             colums = 2
-            for j in range(0, len(ass)):
-                wcell5 = wc.cell(rows, colums)
-                wcell5.value = ass[j] * podgrup_ass[i]
-                colums = colums + 1
-            wcell6 = wc.cell(rows, colums)
-            wcell6.value = podgrup_ass[i]
             rows = rows + 1
+            # Часы асистентов
+            for i in range(0, len(pibass)):
+                colums = 2
+                for j in range(0, len(ass)):
+                    wcell5 = wc.cell(rows, colums)
+                    wcell5.value = ass[j] * podgrup_ass[i]
+                    colums = colums + 1
+                wcell6 = wc.cell(rows, colums)
+                wcell6.value = podgrup_ass[i]
+                rows = rows + 1
 
 
         wt.save("Розподіл навантаження.xlsx")
