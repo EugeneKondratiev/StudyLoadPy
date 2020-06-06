@@ -3,17 +3,15 @@ from openpyxl.worksheet.worksheet import Worksheet
 import numpy as np
 
 class Nagryzka02:
-    def __init__(self):
-                 #, file_name_1sem_den, file_name_1sem_zaoch, file_name_2sem_den, file_name_2sem_zaoch, PIB_lec,
-                 #PIB_ass, count_lec, subject, subgroup_count_array):
-        book = "resources\\ІТтаКБ. Сем I. Форма навчання  денна.xlsx"
+    def __init__(self, file_name, PIB_lec, PIB_ass, count_lec, subject, subgroup_count_array):
+        book = file_name
         wd = load_workbook(book)
         doc: Worksheet = wd.active
-        piblek = ["dsfsf"]
-        pibass = ["dfsgsd", "sdfgdf"]
-        podgrup_ass = [1, 3]
-        countlek = 1
-        predmet = "Експертні системи"
+        piblek = PIB_lec
+        pibass = PIB_ass
+        podgrup_ass = subgroup_count_array
+        countlek = count_lec
+        predmet = subject
         chasy = []
         lektor = []
         ass = []

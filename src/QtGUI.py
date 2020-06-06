@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, Qt, QtCore
 
 from src.Doc1 import doc1
-from src.Nagryzka import Nagryzka
+from src.Nagryzka02 import Nagryzka02
 from src.convert import ConverterXLS
 from src.countC import CountC
 from src.design import Ui_MainWindow
@@ -50,12 +50,20 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
                                    self.default_file_names[self.comboBox_5.currentIndex()],
                                    self.comboBox_Subjects.currentText())
             _translate = QtCore.QCoreApplication.translate
-            self.label_lect_1sem.setText(_translate("MainWindow", str(int(countC_object.sem1_lektor))))
-            self.label_lect_1sem_2.setText(_translate("MainWindow", str(int(countC_object.sem1_ass))))
-            self.label_lect_1sem_3.setText(_translate("MainWindow", str(int(countC_object.sem2_lektor))))
-            self.label_lect_1sem_4.setText(_translate("MainWindow", str(int(countC_object.sem2_ass))))
-            self.label_pidgrup_1sem.setText(_translate("MainWindow", str(countC_object.podgrup_1sem)))
-            self.label_pidgrup_2sem.setText(_translate("MainWindow", str(countC_object.podgrup_2sem)))
+            self.label_lect_1sem_den.setText(_translate("MainWindow", str(int(countC_object.sem1_den_lektor))))
+            self.label_lect_1sem_zaoch.setText(_translate("MainWindow", str(int(countC_object.sem1_zaoch_lektor))))
+            self.label_lect_2sem_denna.setText(_translate("MainWindow", str(int(countC_object.sem2_den_lektor))))
+            self.label_lect_2sem_zaoch.setText(_translate("MainWindow", str(int(countC_object.sem2_zaoch_lektor))))
+
+            self.label_asist_1sem_den.setText(_translate("MainWindow", str(int(countC_object.sem1_den_ass))))
+            self.label_asist_1sem_zaoch.setText(_translate("MainWindow", str(int(countC_object.sem1_zaoch_ass))))
+            self.label_asist_2sem_den.setText(_translate("MainWindow", str(int(countC_object.sem2_den_ass))))
+            self.label_asist_2sem_zaoch.setText(_translate("MainWindow", str(int(countC_object.sem2_zaoch_ass))))
+
+            self.label_pidgrup_1sem_den.setText(_translate("MainWindow", str(countC_object.podgrup_d1sem)))
+            self.label_pidgrup_2sem_den.setText(_translate("MainWindow", str(countC_object.podgrup_d2sem)))
+            self.label_pidgrup_1sem_zaoch.setText(_translate("MainWindow", str(countC_object.podgrup_z1sem)))
+            self.label_pidgrup_2sem_zaoch.setText(_translate("MainWindow", str(countC_object.podgrup_z2sem)))
         else:
             error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning,
                                           "Часи навантаження", "Відкрийте файли кафедри!",
@@ -129,15 +137,22 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
         array_subject_count = []
         for item in range(self.listWidget_count_group.count()):
             array_subject_count.append(self.listWidget_count_group.item(item).text())
+
+        file_name = ""
+        if self.comboBox_form_study.currentText() == "Сем І. Денна":
+            file_name = self.default_file_names[self.comboBox.currentIndex()]
+        elif self.comboBox_form_study.currentText() == "Сем ІІ. Денна":
+            file_name = self.default_file_names[self.comboBox_2.currentIndex()]
+        elif self.comboBox_form_study.currentText() == "Сем І. Заочна":
+            file_name = self.default_file_names[self.comboBox_4.currentIndex()]
+        elif self.comboBox_form_study.currentText() == "Сем ІІ. Заочна":
+            file_name = self.default_file_names[self.comboBox_5.currentIndex()]
+
         try:
-            nagr = Nagryzka(self.default_file_names[self.comboBox.currentIndex()],
-                            self.default_file_names[self.comboBox_4.currentIndex()],
-                            self.default_file_names[self.comboBox_2.currentIndex()],
-                            self.default_file_names[self.comboBox_5.currentIndex()],
+            nagr = Nagryzka02(file_name,
                             array_lectors,
                             array_assisstents,
                             len(array_lectors),
-                            len(array_assisstents),
                             self.comboBox_Subjects.currentText(),
                             array_subject_count)
             info = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Information,

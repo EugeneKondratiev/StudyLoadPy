@@ -59,11 +59,11 @@ class CountC:
         t = ""
         y = 0
         for i in range(18, zaochna1.max_row):
-            if zaochna1.cell(row=i, column=2).value != None and zaochna1.cell(row=i, column=2).value != "":
+            if zaochna1.cell(row=i, column=2).value != None and zaochna1.cell(row=i, column=2).value != 0:
                 k = zaochna1.cell(row=i - 1, column=2).value
-                dict1_cond = {temp: v for (temp, v) in zaoch.items() if temp == k if temp != None}
-                if len(dict1_cond.items()) != 0 and t != "":
-                    nympyarray1 = np.array(list(dict1_cond.values()))
+                dict2_cond = {temp: v for (temp, v) in zaoch.items() if temp == k if temp != None}
+                if len(dict2_cond.items()) != 0 and t != "":
+                    nympyarray1 = np.array(list(dict2_cond.values()))
                     nympyarray2 = np.array(c)
                     nympyarray3 = np.array(nympyarray1 + nympyarray2)
                     zaoch[t] = nympyarray3.tolist()
@@ -86,9 +86,9 @@ class CountC:
             if denna2.cell(row=i, column=2).value != None and denna2.cell(row=i, column=2).value != 0:
                 k = denna2.cell(row=i - 1, column=2).value
 
-                dict2_cond = {temp: v for (temp, v) in den.items() if temp == k if temp != None}
-                if len(dict2_cond.items()) != 0 and t != "":
-                    nympyarray1 = np.array(list(dict2_cond.values()))
+                dict3_cond = {temp: v for (temp, v) in den2.items() if temp == k if temp != None}
+                if len(dict3_cond.items()) != 0 and t != "":
+                    nympyarray1 = np.array(list(dict3_cond.values()))
                     nympyarray2 = np.array(c)
                     nympyarray3 = np.array(nympyarray1 + nympyarray2)
                     den2[t] = nympyarray3.tolist()
@@ -105,11 +105,11 @@ class CountC:
         t = ""
         y = 0
         for i in range(18, zaochna2.max_row):
-            if zaochna2.cell(row=i, column=2).value != None and zaochna2.cell(row=i, column=2).value != "":
+            if zaochna2.cell(row=i, column=2).value != None and zaochna2.cell(row=i, column=2).value != 0:
                 k = zaochna2.cell(row=i - 1, column=2).value
-                dict2_cond = {temp: v for (temp, v) in zaoch.items() if temp == k if temp != None}
-                if len(dict2_cond.items()) != 0 and t != "":
-                    nympyarray1 = np.array(list(dict2_cond.values()))
+                dict4_cond = {temp: v for (temp, v) in zaoch2.items() if temp == k if temp != None}
+                if len(dict4_cond.items()) != 0 and t != "":
+                    nympyarray1 = np.array(list(dict4_cond.values()))
                     nympyarray2 = np.array(c)
                     nympyarray3 = np.array(nympyarray1 + nympyarray2)
                     zaoch2[t] = nympyarray3.tolist()
