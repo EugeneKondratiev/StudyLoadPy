@@ -130,6 +130,8 @@ class Nagryzka02:
             wcell4.value = "Дист. Модуль"
             wcell1 = wc.cell(3, 22)
             wcell1.value = "Додаткові години"
+            wcell1 = wc.cell(3, 23)
+            wcell1.value = "Всього"
 
             #Название предмета
             wcell1 = wc.cell(1, 1)
@@ -156,6 +158,7 @@ class Nagryzka02:
             colums = 2
             # Часы лекторов
             for i in range(0, len(piblek)):
+                q = 0
                 colums = 2
                 wcell6 = wc.cell(rows, colums)
                 wcell6.value = kolvo_styd1
@@ -172,12 +175,16 @@ class Nagryzka02:
                 for j in range(0, len(lektor)):
                     wcell4 = wc.cell(rows, colums)
                     wcell4.value = lektor[j]
+                    q = q + lektor[j]
                     colums = colums + 1
+                wcell6 = wc.cell(rows, colums)
+                wcell6.value = q
                 rows = rows + 1
 
             colums = 2
             # Часы асистентов
             for i in range(0, len(pibass)):
+                q = 0
                 colums = 2
                 wcell6 = wc.cell(rows, colums)
                 wcell6.value = kolvo_styd1
@@ -194,7 +201,10 @@ class Nagryzka02:
                 for j in range(0, len(ass)):
                     wcell5 = wc.cell(rows, colums)
                     wcell5.value = int(ass[j]) * int(podgrup_ass[i])
+                    q = q + (int(ass[j]) * int(podgrup_ass[i]))
                     colums = colums + 1
+                wcell6 = wc.cell(rows, colums)
+                wcell6.value = q
                 rows = rows + 1
 
 
