@@ -15,17 +15,26 @@ class CountC:
         denna1: Worksheet = wd.active
         zaochna1: Worksheet = ws.active
         predmet = subject
-        chasy = []
-        chasy2 = []
-        lektor = []
-        lektor2 = []
-        ass = []
-        ass2 = []
+        lektor_d1 = []
+        lektor_d2 = []
+        lektor_z1 = []
+        lektor_z2 = []
+        ass_den1 = []
+        ass_den2 = []
+        ass_zaoch1 = []
+        ass_zaoch2 = []
         den = {}
         zaoch = {}
         c = []
-        podgrup1 = 0
-        podgrup2 = 0
+        podgrup_d1 = 0
+        podgrup_d2 = 0
+        podgrup_z1 = 0
+        podgrup_z2 = 0
+        chasy_den1 = []
+        chasy_zaoch1 = []
+        chasy_den2 = []
+        chasy_zaoch2 = []
+
 
         for i in range(18, denna1.max_row):
             if denna1.cell(row=i, column=2).value != None and denna1.cell(row=i, column=2).value != 0:
@@ -68,29 +77,6 @@ class CountC:
                         c.append(zaochna1.cell(row=i, column=j).value)
         del den[None]
         del zaoch[None]
-        dict1_tripleCond = {}
-        for (temp, v) in den.items():
-            ikval = False
-            for (k, c) in zaoch.items():
-                for i in range(1, denna1.max_column):
-                    if predmet == denna1.cell(row=i, column=2).value and k == predmet:
-                        podgrup1 = denna1.cell(row=i, column=7).value + zaochna1.cell(row=i, column=7).value
-                if temp == k and temp != None:
-                    nympyarray1 = np.array(v)
-                    nympyarray2 = np.array(c)
-                    nympyarray3 = np.array(nympyarray1 + nympyarray2)
-                    dict1_tripleCond[k] = nympyarray3.tolist()
-                    ikval = True
-
-            if ikval == False:
-                dict1_tripleCond[temp] = v
-                dict1_tripleCond[k] = c
-
-        for i in range(1, denna1.max_column):
-            if predmet == denna1.cell(row=i, column=2).value:
-                podgrup1 = denna1.cell(row=i, column=7).value
-            elif predmet == zaochna1.cell(row=i, column=2).value:
-                podgrup1 = zaochna1.cell(row=i, column=7).value
 
         den2 = {}
         zaoch2 = {}
@@ -138,46 +124,64 @@ class CountC:
 
         del den2[None]
         del zaoch2[None]
-        dict2_tripleCond = {}
-        for (temp, v) in den2.items():
-            ikval = False
-            for (k, c) in zaoch2.items():
-                if temp == k and temp != None:
-                    nympyarray1 = np.array(v)
-                    nympyarray2 = np.array(c)
-                    nympyarray3 = np.array(nympyarray1 + nympyarray2)
-                    dict2_tripleCond[k] = nympyarray3.tolist()
-                    ikval = True
-            if ikval == False:
-                dict2_tripleCond[temp] = v
-                dict2_tripleCond[k] = c
+
+        for i in range(1, denna1.max_column):
+            if predmet == denna1.cell(row=i, column=2).value:
+                podgrup_d1 = denna1.cell(row=i, column=7).value
 
         for i in range(1, denna2.max_column):
             if predmet == denna2.cell(row=i, column=2).value:
-                podgrup2 = denna2.cell(row=i, column=7).value
-            elif predmet == zaochna2.cell(row=i, column=2).value:
-                podgrup2 = zaochna2.cell(row=i, column=7).value
+                podgrup_d2 = denna2.cell(row=i, column=7).value
 
-        for (k, c) in dict1_tripleCond.items():
+        for i in range(1, zaochna1.max_column):
+            if predmet == zaochna1.cell(row=i, column=2).value:
+                podgrup_z1 = zaochna1.cell(row=i, column=7).value
+
+        for i in range(1, zaochna2.max_column):
+            if predmet == zaochna2.cell(row=i, column=2).value:
+                podgrup_z2 = zaochna2.cell(row=i, column=7).value
+
+        for (k, c) in den.items():
             if predmet == k:
-                chasy = c
+                chasy_den1 = c
 
         k = ""
-        for (y, c) in dict2_tripleCond.items():
+        for (y, c) in zaoch.items():
             if predmet == y:
-                chasy2 = c
+                chasy_zaoch1 = c
 
-        for i in range(0, len(chasy)):
-            if i == 0 or i == 3 or i == 4 or i == 5 or i == 6 or i == 7 or i == 8 or i == 9 or i == 10 or i == 11 or i == 12 or i == 15 or i == 16:
-                lektor.append(chasy[i])
-            elif i != 17:
-                ass.append(chasy[i])
+        for (k, c) in den2.items():
+            if predmet == k:
+                chasy_den2 = c
 
-        for i in range(0, len(chasy2)):
+        k = ""
+        for (y, c) in zaoch2.items():
+            if predmet == y:
+                chasy_zaoch2 = c
+
+        for i in range(0, len(chasy_den1)):
             if i == 0 or i == 3 or i == 4 or i == 5 or i == 6 or i == 7 or i == 8 or i == 9 or i == 10 or i == 11 or i == 12 or i == 15 or i == 16:
-                lektor2.append(chasy2[i])
+                lektor_d1.append(chasy_den1[i])
             elif i != 17:
-                ass2.append(chasy2[i])
+                ass_den1.append(chasy_den1[i])
+
+        for i in range(0, len(chasy_den2)):
+            if i == 0 or i == 3 or i == 4 or i == 5 or i == 6 or i == 7 or i == 8 or i == 9 or i == 10 or i == 11 or i == 12 or i == 15 or i == 16:
+                lektor_d2.append(chasy_den2[i])
+            elif i != 17:
+                ass_den2.append(chasy_den2[i])
+
+        for i in range(0, len(chasy_zaoch1)):
+            if i == 0 or i == 3 or i == 4 or i == 5 or i == 6 or i == 7 or i == 8 or i == 9 or i == 10 or i == 11 or i == 12 or i == 15 or i == 16:
+                lektor_z1.append(chasy_zaoch1[i])
+            elif i != 17:
+                ass_zaoch1.append(chasy_zaoch1[i])
+
+        for i in range(0, len(chasy_zaoch2)):
+            if i == 0 or i == 3 or i == 4 or i == 5 or i == 6 or i == 7 or i == 8 or i == 9 or i == 10 or i == 11 or i == 12 or i == 15 or i == 16:
+                lektor_z2.append(chasy_zaoch2[i])
+            elif i != 17:
+                ass_zaoch2.append(chasy_zaoch2[i])
 
 
 
@@ -194,9 +198,16 @@ class CountC:
         # ass_obch = nympyarray3
 
     #CОБСТВЕННО ВОТ ЦиФРА
-        self.podgrup_1sem = podgrup1
-        self.podgrup_2sem = podgrup2
-        self.sem1_ass = np.sum(ass)
-        self.sem1_lektor = np.sum(lektor)
-        self.sem2_ass = np.sum(ass2)
-        self.sem2_lektor = np.sum(lektor2)
+        self.podgrup_d1sem = podgrup_d1
+        self.podgrup_d2sem = podgrup_d2
+        self.podgrup_z1sem = podgrup_z1
+        self.podgrup_z2sem = podgrup_z2
+        self.sem1_den_ass = np.sum(ass_den1)
+        self.sem2_den_ass = np.sum(ass_den2)
+        self.sem1_zaoch_ass = np.sum(ass_zaoch1)
+        self.sem2_zaoch_ass = np.sum(ass_zaoch2)
+        self.sem1_den_lektor = np.sum(lektor_d1)
+        self.sem2_den_lektor = np.sum(lektor_d2)
+        self.sem1_zaoch_lektor = np.sum(lektor_z1)
+        self.sem2_zaoch_lektor = np.sum(lektor_z2)
+

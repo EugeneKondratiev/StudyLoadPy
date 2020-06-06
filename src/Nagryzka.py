@@ -32,6 +32,8 @@ class Nagryzka:
         kolvo_styd2 = 0
         grypp1 = ""
         grypp2 = ""
+        potok1 = 0
+        potok2 = 0
 
         den = {}
         zaoch = {}
@@ -89,6 +91,8 @@ class Nagryzka:
                             kolvo_styd1 = denna1.cell(row=i, column=4).value + zaochna1.cell(row=i, column=4).value
                         if predmet == denna1.cell(row=i, column=2).value and k == predmet:
                             podgrup1 = denna1.cell(row=i, column=7).value + zaochna1.cell(row=i, column=7).value
+                        if predmet == denna1.cell(row=i, column=2).value and k == predmet:
+                            potok1 = denna1.cell(row=i, column=8).value + zaochna1.cell(row=i, column=8).value
                     nympyarray1 = np.array(v)
                     nympyarray2 = np.array(c)
                     nympyarray3 = np.array(nympyarray1 + nympyarray2)
@@ -112,6 +116,11 @@ class Nagryzka:
                 podgrup1 = denna1.cell(row=i, column=7).value
             elif predmet == zaochna1.cell(row=i, column=2).value:
                 podgrup1 = zaochna1.cell(row=i, column=7).value
+
+            if predmet == denna1.cell(row=i, column=2).value:
+                potok1 = denna1.cell(row=i, column=8).value
+            elif predmet == zaochna1.cell(row=i, column=2).value:
+                potok1 = zaochna1.cell(row=i, column=8).value
 
         den2 = {}
         zaoch2 = {}
@@ -171,6 +180,8 @@ class Nagryzka:
                             kolvo_styd2 = denna2.cell(row=i, column=7).value + zaochna2.cell(row=i, column=7).value
                         if predmet == denna2.cell(row=i, column=2).value and k == predmet:
                             podgrup2 = denna2.cell(row=i, column=7).value + zaochna2.cell(row=i, column=7).value
+                        if predmet == denna2.cell(row=i, column=2).value and k == predmet:
+                            potok2 = denna2.cell(row=i, column=8).value + zaochna2.cell(row=i, column=8).value
                     nympyarray1 = np.array(v)
                     nympyarray2 = np.array(c)
                     nympyarray3 = np.array(nympyarray1 + nympyarray2)
@@ -195,6 +206,11 @@ class Nagryzka:
                 podgrup2 = denna2.cell(row=i, column=7).value
             elif predmet == zaochna2.cell(row=i, column=2).value:
                 podgrup2 = zaochna2.cell(row=i, column=7).value
+
+            if predmet == denna2.cell(row=i, column=2).value:
+                potok2 = denna2.cell(row=i, column=8).value
+            elif predmet == zaochna2.cell(row=i, column=2).value:
+                potok2 = zaochna2.cell(row=i, column=8).value
 
         #НАЧАЛО КОНЦА
 
@@ -358,6 +374,8 @@ class Nagryzka:
             wcell4.value = "К-сть студ"
             wcell4 = wc.cell(3, 16)
             wcell4.value = "Шифр групп"
+            wcell4 = wc.cell(3, 17)
+            wcell4.value = ""
             wcell1 = wc.cell(5, 1)
             wcell1.value = "ПІБ викладача"
             wcell1 = wc.cell(5, 2)
