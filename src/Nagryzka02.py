@@ -79,10 +79,10 @@ class Nagryzka02:
         wc = wt[predmet]
         for i in range(0, len(chasy)):
             if i == 0 or i == 3 or i == 4 or i == 5 or i == 6 or i == 7 or i == 8 or i == 9 or i == 10 or i == 11 or i == 12 or i == 13 or i == 15:
-                lektor.append(chasy[i] / countlek)
+                lektor.append(float(chasy[i] / countlek))
                 ass.append(0)
             elif i != 17:
-                ass.append(chasy[i] / podgrup1)
+                ass.append(float(chasy[i] / podgrup1))
                 lektor.append(0)
 
         if len(ass) != 0:
@@ -200,8 +200,8 @@ class Nagryzka02:
                 colums = colums + 1
                 for j in range(0, len(ass)):
                     wcell5 = wc.cell(rows, colums)
-                    wcell5.value = int(ass[j]) * int(podgrup_ass[i])
-                    q = q + (int(ass[j]) * int(podgrup_ass[i]))
+                    wcell5.value = ass[j] * podgrup_ass[i]
+                    q = q + ass[j] * podgrup_ass[i]
                     colums = colums + 1
                 wcell6 = wc.cell(rows, colums)
                 wcell6.value = q

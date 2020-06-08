@@ -151,7 +151,7 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
             array_assisstents.append(self.listWidget_assisstents.item(item).text())
         array_subject_count = []
         for item in range(self.listWidget_count_group.count()):
-            array_subject_count.append(self.listWidget_count_group.item(item).text())
+            array_subject_count.append(float(self.listWidget_count_group.item(item).text()))
 
         file_name = ""
         if self.comboBox_form_study.currentText() == "Сем І. Денна":
