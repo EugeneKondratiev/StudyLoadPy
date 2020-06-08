@@ -16,7 +16,7 @@ class Zvit3:
         wd = load_workbook("resources\\DB_study_load.xlsx")
         fam: Worksheet = wd.active
         try:
-            wt = load_workbook("zvit2.xlsx")
+            wt = load_workbook("Розподіл навантаження(фахівці).xlsx")
         except FileNotFoundError:
             wt: Workbook = Workbook()
         k = ""
@@ -514,7 +514,7 @@ class Zvit3:
                         rows = rows + 1
 
 
-        wt.save("zvit2.xlsx")
+        wt.save("Розподіл навантаження(фахівці).xlsx")
         wt.close()
         wb.close()
         wd.close()

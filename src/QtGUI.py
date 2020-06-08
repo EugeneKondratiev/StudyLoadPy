@@ -2,6 +2,7 @@ from PyQt5 import QtWidgets, Qt, QtCore
 
 from src.Doc1 import doc1
 from src.Nagryzka02 import Nagryzka02
+from src.Zvit3 import Zvit3
 from src.convert import ConverterXLS
 from src.countC import CountC
 from src.design import Ui_MainWindow
@@ -41,6 +42,20 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
         self.pushButton_Save_db.clicked.connect(self.save_db)
         self.pushButton_Calculate_load.clicked.connect(self.calculate_load)
         self.comboBox_Subjects.currentTextChanged.connect(self.on_change_value)
+        self.pushButton_Calculate_Load_teachers.clicked.connect(self.calculate_load_teachers)
+
+    def calculate_load_teachers(self):
+        try:
+            ob_load = Zvit3()
+            info = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Information,
+                                         "Розподіл навантаження", "Розподілення для фахівців виконано успішно!",
+                                         QtWidgets.QMessageBox.Ok)
+            info.exec_()
+        except:
+            error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning,
+                                          "Розподіл навантаження", "Спочатку розподіліть навантаження за всіма формами!",
+                                          QtWidgets.QMessageBox.Ok)
+            error.exec_()
 
     def on_change_value(self):
         if self.comboBox.currentText() != '' and self.comboBox_2.currentText() != '' and self.comboBox_4.currentText() != '' and self.comboBox_5.currentText() != '':
@@ -336,8 +351,8 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
                 pars_object = pars(self.default_file_names_rnp[self.comboBox_3.currentIndex()],
                                    self.default_file_names[self.comboBox_4.currentIndex()],
                                    self.default_file_names[self.comboBox_5.currentIndex()])
-            info = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Information, "Compare file",
-                                         "Compare succeeded!\n",
+            info = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Information, "Порінення файлів",
+                                         "Порівнення файлів кафедри та РНП виконано успішно!!\n",
                                          QtWidgets.QMessageBox.Ok)
             info.exec_()
         except:
@@ -355,13 +370,13 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
                                  self.default_file_names[self.comboBox_4.currentIndex()],
                                  self.default_file_names[self.comboBox_5.currentIndex()])
 
-            info = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Information, "Report file",
-                                         "Report created!\n",
+            info = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Information, "Звіт",
+                                         "Звіт був створений!\n",
                                          QtWidgets.QMessageBox.Ok)
             info.exec_()
         except:
-            error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning, "Report File",
-                                          "Failed to create report file\n",
+            error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning, "Звіт",
+                                          "Відкрийте файли для створення звіту\n",
                                           QtWidgets.QMessageBox.Ok)
             error.exec_()
         return
