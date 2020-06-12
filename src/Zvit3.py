@@ -21,9 +21,6 @@ class Zvit3:
             wt: Workbook = Workbook()
         k = ""
 
-
-
-
         for i in range(1, fam.max_row):
             if fam.cell(row=i, column=2).value != None:
                 k = fam.cell(row=i, column=2).value
@@ -47,7 +44,8 @@ class Zvit3:
                         if p == 1:
                             wcell1 = wc.cell(1, 1)
                             wcell1.value = k
-                            wcell1 = wc.cell(rows-1, 5)
+                            print(rows, k)
+                            wcell1 = wc.cell(rows - 1, 5)
                             wcell1.value = "Семестр 1 Денна"
                             wcell1 = wc.cell(rows, 1)
                             wcell1.value = "Назва навчальних дисциплін"
@@ -147,14 +145,14 @@ class Zvit3:
                         wcell1.value = doc1.cell(row=j, column=24).value
 
                         rows = rows + 1
-            rows = rows + 2
+            if rows > 2:
+                rows = rows + 2
             p = 0
             for sheet in wz:
                 wz.active = sheet
                 doc3: Worksheet = wz.active
 
                 for u in range(1, doc3.max_row + 1):
-
 
                     if k == doc3.cell(row=u, column=1).value:
                         sheetnames = wt.sheetnames
@@ -169,7 +167,7 @@ class Zvit3:
                         if p == 1:
                             wcell1 = wc.cell(1, 1)
                             wcell1.value = k
-                            wcell1 = wc.cell(rows-1, 5)
+                            wcell1 = wc.cell(rows - 1, 5)
                             wcell1.value = "Семестр 1 Заочна"
                             wcell1 = wc.cell(rows, 1)
                             wcell1.value = "Назва навчальних дисциплін"
@@ -269,14 +267,14 @@ class Zvit3:
                         wcell1.value = doc3.cell(row=u, column=24).value
 
                         rows = rows + 1
-            rows = rows + 2
+            if rows > 2:
+                rows = rows + 2
             p = 0
             for sheet in wq:
                 wq.active = sheet
                 doc2: Worksheet = wq.active
 
                 for o in range(1, doc2.max_row + 1):
-
 
                     if k == doc2.cell(row=o, column=1).value:
 
@@ -292,7 +290,7 @@ class Zvit3:
                         if p == 1:
                             wcell1 = wc.cell(1, 1)
                             wcell1.value = k
-                            wcell1 = wc.cell(rows-1, 5)
+                            wcell1 = wc.cell(rows - 1, 5)
                             wcell1.value = "Семестр 2 Денна"
                             wcell1 = wc.cell(rows, 1)
                             wcell1.value = "Назва навчальних дисциплін"
@@ -392,7 +390,8 @@ class Zvit3:
                         wcell1.value = doc2.cell(row=o, column=24).value
 
                         rows = rows + 1
-            rows = rows + 2
+            if rows > 2:
+                rows = rows + 2
             p = 0
             for sheet in wr:
                 wr.active = sheet
@@ -413,7 +412,7 @@ class Zvit3:
                         if p == 1:
                             wcell1 = wc.cell(1, 1)
                             wcell1.value = k
-                            wcell1 = wc.cell(rows-1, 5)
+                            wcell1 = wc.cell(rows - 1, 5)
                             wcell1.value = "Семестр 2 Заочна"
                             wcell1 = wc.cell(rows, 1)
                             wcell1.value = "Назва навчальних дисциплін"
@@ -512,12 +511,64 @@ class Zvit3:
                         wcell1.value = doc4.cell(row=q, column=24).value
 
                         rows = rows + 1
+        array1 = []
+        den = []
+        array = []
+        suma_god = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        god = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        for sheet in wt:
+            wt.active = sheet
+            print(sheet)
+            wc: Worksheet = wt.active
+            den = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            array1 = []
+            array = []
+            suma_god = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            for j in range(1, wc.max_row + 1):
+                god = den
+                if len(array) != 0 and len(array1) != 0:
+                    nympyarray1 = np.array(array)
+                    nympyarray2 = np.array(array1)
+                    nympyarray3 = np.array(nympyarray1 + nympyarray2)
+                    den = nympyarray3
+                    array1 = array
+                elif len(array) != 0:
+                    den = array
+
+                if len(array) != 0:
+                    array1 = array
+                    print(array1)
+                array = []
+                if j > 1 and wc.cell(row=j-1, column=1).value != "Всього":
+                    for i in range(6, 24):
+
+                        if wc.cell(row=j, column=1).value == None and wc.cell(row=j, column=5).value == None and len(den) > 0 or wc.cell(row=j, column=1).value == "Всього" and wc.cell(row=j, column=5).value == None and len(den) > 0:
+                            wcell1 = wc.cell(j, 1)
+                            wcell1.value = "Всього"
+                            wcell1 = wc.cell(j, i)
+                            wcell1.value = den[i-6]
+                            nympyarray4 = np.array(den)
+                            nympyarray5 = np.array(god)
+                            nympyarray6 = np.array(nympyarray4 + nympyarray5)
+                            suma_god = nympyarray6
+
+
+                        elif(wc.cell(row=j, column=i).value) != None and isinstance(wc.cell(row=j, column=i).value, str) != True:
+                            array.append(wc.cell(row=j, column=i).value)
+                        if j - 1 == wc.max_row:
+                            wcell2 = wc.cell(j + 2, 1)
+                            wcell2.value = "Всього рік"
+                            wcell2 = wc.cell(j + 2, i)
+                            wcell2.value = suma_god[i-6]
+
+                elif wc.cell(row=j, column=1).value == None:
+
+                    den = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                    array1 = []
+                    array = []
 
 
         wt.save("Розподіл навантаження(фахівці).xlsx")
         wt.close()
         wb.close()
         wd.close()
-
-
-

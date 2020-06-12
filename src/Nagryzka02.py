@@ -148,8 +148,7 @@ class Nagryzka02:
                 rows = rows + 1
 
             #ФИО асистентов
-            pibass.append("Всього")
-            for i in range(0, len(pibass)+1):
+            for i in range(0, len(pibass)):
                 wcell3 = wc.cell(rows, 1)
                 wcell3.value = pibass[i]
                 rows = rows + 1
@@ -208,7 +207,22 @@ class Nagryzka02:
                 wcell6.value = q
                 rows = rows + 1
 
-            colums = 2
+            colums = 1
+            wcell6 = wc.cell(rows, colums)
+            wcell6.value = "Всього"
+            colums = colums + 1
+            wcell6 = wc.cell(rows, colums)
+            wcell6.value = kolvo_styd1
+            colums = colums + 1
+            wcell7 = wc.cell(rows, colums)
+            wcell7.value = grypp1
+            colums = colums + 1
+            wcell7 = wc.cell(rows, colums)
+            wcell7.value = potok1
+            colums = colums + 1
+            wcell6 = wc.cell(rows, colums)
+            wcell6.value = podgrup1
+            colums = colums + 1
             for j in range(0, len(chasy)):
                 wcell5 = wc.cell(rows, colums)
                 wcell5.value = chasy[j]
