@@ -524,7 +524,7 @@ class Zvit3:
             array1 = []
             array = []
             suma_god = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-            for j in range(1, wc.max_row + 1):
+            for j in range(1, wc.max_row + 2):
                 god = den
                 if len(array) != 0 and len(array1) != 0:
                     nympyarray1 = np.array(array)
