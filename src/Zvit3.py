@@ -542,7 +542,7 @@ class Zvit3:
                 if j > 1 and wc.cell(row=j-1, column=1).value != "Всього":
                     for i in range(6, 24):
 
-                        if wc.cell(row=j, column=1).value == None and wc.cell(row=j, column=5).value == None and len(den) > 0 or wc.cell(row=j, column=1).value == "Всього" and wc.cell(row=j, column=5).value == None and len(den) > 0:
+                        if wc.cell(row=j, column=1).value == None and wc.cell(row=j, column=5).value == None and len(den) >= 18 or wc.cell(row=j, column=1).value == "Всього" and wc.cell(row=j, column=5).value == None and len(den) > 0:
                             wcell1 = wc.cell(j, 1)
                             wcell1.value = "Всього"
                             wcell1 = wc.cell(j, i)

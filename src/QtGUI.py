@@ -356,7 +356,7 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
                                          QtWidgets.QMessageBox.Ok)
             info.exec_()
         except:
-            error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning, "Convert File", "Failed to convert file\n",
+            error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning, "Порівняння", "Неправильний формат файлу або файл вже відкритий!\n",
                                           QtWidgets.QMessageBox.Ok)
             error.exec_()
         return

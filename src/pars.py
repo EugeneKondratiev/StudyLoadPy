@@ -27,12 +27,15 @@ class pars:
                         print(j, sem1.cell(row=j, column=2).value, sem1.cell(row=j, column=10).value, sem1.cell(row=j, column=11).value, sem1.cell(row=j, column=12).value)
 
                         if RNP.cell(row=i, column=24).value != sem1.cell(row=j, column=10).value:
+                            print('RNP color 24')
                             sem1.cell(row=j, column=10).fill = PatternFill(fill_type='solid', start_color='ff8327', end_color='ff8327')  # Данный код позволяет делать оформление цветом ячейки
 
                         if RNP.cell(row=i, column=26).value != sem1.cell(row=j, column=11).value:
+                            print('RNP color 26')
                             sem1.cell(row=j, column=11).fill = PatternFill(fill_type='solid', start_color='ff8327', end_color='ff8327')  # Данный код позволяет делать оформление цветом ячейки
 
                         if RNP.cell(row=i, column=28).value != sem1.cell(row=j, column=12).value:
+                            print('RNP color 28')
                             sem1.cell(row=j, column=12).fill = PatternFill(fill_type='solid', start_color='ff8327', end_color='ff8327')  # Данный код позволяет делать оформление цветом ячейки
             # ПРОВЕРКА ПО ВТОРОМУ ФАЙЛУ
             for l in range(1, sem2.max_row):
@@ -57,7 +60,9 @@ class pars:
 
 
 
-        wb.save("resources\\Бакалавр (Денна)\\РНП 122 КН КН 1 курс скороч. 2р. 2019-2020 (2019-11-19).xlsx")
+        wb.save(rnp_file)
+        wd.save(forma_1sem)
+        ws.save(forma_2sem)
         wb.close()
         wd.close()
         ws.close()
