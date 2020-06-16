@@ -10,13 +10,13 @@ class ConverterXLS:
             wb = excel.Workbooks.Open(file_name)
             try:
                 wb.SaveAs(file_name + 'x', FileFormat=51)  # FileFormat = 51 is for .xlsx extension
-                info = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Information, "Convert excel file",
-                                             "Convert xls to xlsx succeeded!\n",
+                info = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Information, "Конвертування",
+                                             "Конвертування xls в xlsx виконано!\n",
                                              QtWidgets.QMessageBox.Ok)
                 info.exec_()
             except:
-                error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning, "Save Source File",
-                                              "You have declined convert this file\n",
+                error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning, "Збереження файлу",
+                                              "Ви відминили перезапис файлу!\n",
                                               QtWidgets.QMessageBox.Ok)
                 error.exec_()
             finally:
@@ -24,7 +24,7 @@ class ConverterXLS:
                 excel.Application.Quit()
 
         else:
-            error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning, "Open Source File",
-                                          "This file is not xls\n",
+            error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning, "Конвертування",
+                                          "Даний файл має актуальную версію!\n",
                                           QtWidgets.QMessageBox.Ok)
             error.exec_()

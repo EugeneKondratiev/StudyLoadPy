@@ -183,21 +183,6 @@ class CountC:
             elif i != 17:
                 ass_zaoch2.append(chasy_zaoch2[i])
 
-
-
-
-
-        # nympyarray1 = np.array(lektor)
-        # nympyarray2 = np.array(lektor2)
-        # nympyarray3 = np.array(nympyarray1 + nympyarray2)
-        # lektor_obch = nympyarray3
-        #
-        # nympyarray1 = np.array(ass)
-        # nympyarray2 = np.array(ass2)
-        # nympyarray3 = np.array(nympyarray1 + nympyarray2)
-        # ass_obch = nympyarray3
-
-    #CОБСТВЕННО ВОТ ЦиФРА
         self.podgrup_d1sem = podgrup_d1
         self.podgrup_d2sem = podgrup_d2
         self.podgrup_z1sem = podgrup_z1

@@ -336,7 +336,7 @@ class AppGUI(QtWidgets.QMainWindow, Ui_MainWindow):
             self.comboBox_3.addItems(temp_array)
 
         except IndexError:
-            error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning, "Convert File", "Failed to convert file\n",
+            error = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning, "Конвертування", "Помилка при конвертуванні!\n",
                                           QtWidgets.QMessageBox.Ok)
             error.exec_()
         return
