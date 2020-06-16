@@ -125,19 +125,19 @@ class CountC:
         del den2[None]
         del zaoch2[None]
 
-        for i in range(1, denna1.max_column):
+        for i in range(1, denna1.max_row):
             if predmet == denna1.cell(row=i, column=2).value:
                 podgrup_d1 = denna1.cell(row=i, column=7).value
 
-        for i in range(1, denna2.max_column):
+        for i in range(1, denna2.max_row):
             if predmet == denna2.cell(row=i, column=2).value:
                 podgrup_d2 = denna2.cell(row=i, column=7).value
 
-        for i in range(1, zaochna1.max_column):
+        for i in range(1, zaochna1.max_row):
             if predmet == zaochna1.cell(row=i, column=2).value:
                 podgrup_z1 = zaochna1.cell(row=i, column=7).value
 
-        for i in range(1, zaochna2.max_column):
+        for i in range(1, zaochna2.max_row):
             if predmet == zaochna2.cell(row=i, column=2).value:
                 podgrup_z2 = zaochna2.cell(row=i, column=7).value
 

@@ -566,7 +566,10 @@ class Zvit3:
                     den = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                     array1 = []
                     array = []
-
+        for item in wt.sheetnames:
+            if item == 'Sheet':
+                empty_sheet = wt.get_sheet_by_name('Sheet')
+                wt.remove_sheet(empty_sheet)
 
         wt.save("Розподіл навантаження(фахівці).xlsx")
         wt.close()

@@ -228,6 +228,10 @@ class Nagryzka02:
                 wcell5.value = chasy[j]
                 colums = colums + 1
 
+        for item in wt.sheetnames:
+            if item == 'Sheet':
+                empty_sheet = wt.get_sheet_by_name('Sheet')
+                wt.remove_sheet(empty_sheet)
 
         wt.save(f_name)
         wt.close()
